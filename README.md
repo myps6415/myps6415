@@ -4,6 +4,6 @@
 - 🌱 I’m currently learning how to ETL local site RMDB transfer to cloud
 
 ## 📊 My Status
-![myps6415 GitHub stats](https://github-readme-stats.vercel.app/api?username=myps6415&count_private=true&show_icons=true&theme=radical)
+[![myps6415 GitHub stats](https://github-readme-stats.vercel.app/api?username=myps6415&count_private=true&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
 
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=myps6415&show_icons=true&theme=radical)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=myps6415&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
