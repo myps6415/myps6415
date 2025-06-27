@@ -18,11 +18,14 @@
 ![GCP](https://img.shields.io/badge/-Google%20Cloud-4285F4?style=flat-square&logo=google-cloud&logoColor=white)
 
 ### Data Engineering Stack
-- **ETL/ELT**: Apache Airflow, Prefect, dbt
-- **Data Warehouses**: Snowflake, BigQuery, Redshift
-- **Streaming**: Apache Kafka, Apache Flink
+- **ETL/ELT**: Apache Airflow, dbt
+- **Data Warehouses**: BigQuery, Redshift
+- **Data Lakes**: Apache Iceberg
+- **Query Engines**: Trino
+- **Streaming**: Apache Kafka
 - **Databases**: PostgreSQL, MongoDB, Redis
-- **ML/AI**: TensorFlow, PyTorch, Scikit-learn
+- **Visualization**: Google Data Studio, Redash, Apache Superset
+- **ML/AI**: Scikit-learn
 
 ## 📞 Connect with Me
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hsiao-yu-tung-67547a119/)
