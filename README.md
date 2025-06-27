@@ -17,6 +17,10 @@
 ![AWS](https://img.shields.io/badge/-AWS-232F3E?style=flat-square&logo=amazon-aws&logoColor=white)
 ![GCP](https://img.shields.io/badge/-Google%20Cloud-4285F4?style=flat-square&logo=google-cloud&logoColor=white)
 ![Azure](https://img.shields.io/badge/-Microsoft%20Azure-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white)
+![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
+![Apache Kafka](https://img.shields.io/badge/-Apache%20Kafka-231F20?style=flat-square&logo=apache-kafka&logoColor=white)
+![Ansible](https://img.shields.io/badge/-Ansible-EE0000?style=flat-square&logo=ansible&logoColor=white)
+![Trino](https://img.shields.io/badge/-Trino-DD00A1?style=flat-square&logo=trino&logoColor=white)
 
 ### Data Engineering Stack
 - **Cloud Platforms**: AWS, Google Cloud Platform (GCP), Microsoft Azure
@@ -30,6 +34,23 @@
 - **ML/AI**: Scikit-learn
 - **Infrastructure & Deployment**: Ansible
 
+## 💼 Professional Experience
+- **Senior Data Engineer** - Building enterprise-scale data platforms and analytics solutions
+- **Multi-Cloud Architect** - Designing and implementing data infrastructure across AWS, GCP, and Azure
+- **DevOps Integration** - Streamlining data pipeline deployment using Ansible and containerization
+- **Real-time Analytics** - Developing streaming data solutions with Kafka and Fluentd
+
+## 🏗️ Notable Projects
+- **🚀 Multi-Cloud Data Lake**: Built unified data lake architecture using Apache Iceberg across multiple cloud providers
+- **📊 Real-time Analytics Platform**: Implemented end-to-end streaming analytics using Kafka, Trino, and Superset
+- **🔄 Automated Data Pipeline**: Developed CI/CD for data workflows using Ansible and containerized Airflow
+- **📈 Business Intelligence Dashboard**: Created comprehensive BI solution with Redash and Data Studio integration
+
+## 🎓 Certifications
+- **Cloud Platform Certifications** (AWS/GCP/Azure)
+- **Data Engineering Specializations**
+- **Kubernetes & Container Orchestration**
+
 ## 📞 Connect with Me
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hsiao-yu-tung-67547a119/)
 [![Email](https://img.shields.io/badge/-Email-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:myps6415@gmail.com)
@@ -40,11 +61,15 @@
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=myps6415&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
 
+[![GitHub Streak](https://streak-stats.demolab.com/?user=myps6415&theme=radical)](https://git.io/streak-stats)
+
 ## 🏆 Current Focus
-- 🔥 Building real-time data streaming solutions
-- 🧠 Exploring MLOps and model deployment strategies
-- ⚡ Optimizing data pipeline performance and cost efficiency
-- 🌱 Contributing to open source data engineering projects
+- 🔥 Building real-time data streaming solutions with advanced Kafka configurations
+- 🤖 Researching AI integration in data engineering workflows and LLM applications
+- 🧠 Exploring MLOps and automated model deployment strategies
+- ⚡ Optimizing data pipeline performance and cost efficiency across multi-cloud environments
+- 🌱 Contributing to open source data engineering projects and AI tools
+- 📊 Investigating modern data mesh architectures and decentralized data platforms
 
 ---
 *"Data is the new oil, but insights are the refined fuel that powers decisions."*
