@@ -24,10 +24,11 @@
 - **Data Warehouses**: BigQuery, Redshift
 - **Data Lakes**: Apache Iceberg
 - **Query Engines**: Trino
-- **Streaming**: Apache Kafka
+- **Streaming**: Apache Kafka, Fluentd
 - **Databases**: PostgreSQL, MongoDB, Redis
 - **Visualization**: Google Data Studio, Redash, Apache Superset
 - **ML/AI**: Scikit-learn
+- **Infrastructure & Deployment**: Ansible
 
 ## 📞 Connect with Me
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hsiao-yu-tung-67547a119/)
