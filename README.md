@@ -16,8 +16,10 @@
 ![Kubernetes](https://img.shields.io/badge/-Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
 ![AWS](https://img.shields.io/badge/-AWS-232F3E?style=flat-square&logo=amazon-aws&logoColor=white)
 ![GCP](https://img.shields.io/badge/-Google%20Cloud-4285F4?style=flat-square&logo=google-cloud&logoColor=white)
+![Azure](https://img.shields.io/badge/-Microsoft%20Azure-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white)
 
 ### Data Engineering Stack
+- **Cloud Platforms**: AWS, Google Cloud Platform (GCP), Microsoft Azure
 - **ETL/ELT**: Apache Airflow, dbt
 - **Data Warehouses**: BigQuery, Redshift
 - **Data Lakes**: Apache Iceberg
