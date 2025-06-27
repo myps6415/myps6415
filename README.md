@@ -61,7 +61,7 @@
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=myps6415&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
 
-[![GitHub Streak](https://streak-stats.demolab.com/?user=myps6415)](https://git.io/streak-stats)
+[![GitHub Streak](https://streak-stats.demolab.com/?user=myps6415&theme=radical)](https://streak-stats.demolab.com/?user=myps6415&theme=radical)
 
 ## 🏆 Current Focus
 - 🔥 Building real-time data streaming solutions with advanced Kafka configurations
