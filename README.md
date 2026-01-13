@@ -61,8 +61,6 @@
 
 ![Top Languages](https://my-github-stats-git-main-myps6415s-projects.vercel.app/api/top-langs/?username=myps6415&layout=compact&theme=radical)
 
-![GitHub Streak](https://streak-stats.demolab.com/?user=myps6415&theme=radical)
-
 ## 🏆 Current Focus
 - 🔥 Building real-time data streaming solutions with advanced Kafka configurations
 - 🤖 Researching AI integration in data engineering workflows and LLM applications
