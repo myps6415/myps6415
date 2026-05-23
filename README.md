@@ -1,55 +1,65 @@
+<div align="center">
+
 # 👋 Hi, I'm John Tung (@myps6415)
+
+### Principal Data Engineer · Modern Data Stack on GCP · OSS Contributor
+
+[![Profile views](https://komarev.com/ghpvc/?username=myps6415&label=Profile%20views&color=0e75b6&style=flat-square)](https://github.com/myps6415)
 [![Github](https://img.shields.io/github/followers/myps6415?label=Follow&style=social)](https://github.com/myps6415)
 
+</div>
+
+---
+
 ## 🚀 About Me
-- 🌏 I'm from Taiwan
-- 👀 I'm passionate about data engineering, machine learning, and system architecture
-- 💼 Data Engineer with expertise in building scalable data pipelines and ML infrastructure
-- 🎯 Currently focusing on modern data stack technologies and cloud-native solutions
-- 📚 Always learning and exploring new technologies in the data ecosystem
+- 🌏 Based in Taiwan, working as a Principal Data Engineer at a media group
+- 🛠️ Building the social analytics data platform from the ground up — ingestion, modeling, dashboards, deployment, docs
+- 🎯 Bias toward **lean, observable, cost-disciplined** data stacks (BigQuery + Cloud Run Jobs + dbt) over heavy orchestrators
+- 🔍 Spend equal time on data modeling and on the boring infra that keeps tokens fresh, jobs idempotent, and bills small
+- 📚 Currently going deep on LLM-augmented data pipelines (sentiment / topic classification) and vector search for editorial workflows
 
 ## 🛠️ Technologies & Tools
+
+**Languages & Query**
 ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![SQL](https://img.shields.io/badge/-SQL-4479A1?style=flat-square&logo=postgresql&logoColor=white)
-![Apache Spark](https://img.shields.io/badge/-Apache%20Spark-E25A1C?style=flat-square&logo=apachespark&logoColor=white)
-![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/-Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
-![AWS](https://img.shields.io/badge/-AWS-232F3E?style=flat-square&logo=amazon-aws&logoColor=white)
+
+**Cloud & Infra (GCP)**
 ![GCP](https://img.shields.io/badge/-Google%20Cloud-4285F4?style=flat-square&logo=google-cloud&logoColor=white)
-![Azure](https://img.shields.io/badge/-Microsoft%20Azure-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white)
-![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
-![Apache Kafka](https://img.shields.io/badge/-Apache%20Kafka-231F20?style=flat-square&logo=apache-kafka&logoColor=white)
-![Ansible](https://img.shields.io/badge/-Ansible-EE0000?style=flat-square&logo=ansible&logoColor=white)
-![Trino](https://img.shields.io/badge/-Trino-DD00A1?style=flat-square&logo=trino&logoColor=white)
+![BigQuery](https://img.shields.io/badge/-BigQuery-669DF6?style=flat-square&logo=googlebigquery&logoColor=white)
+![Cloud Run](https://img.shields.io/badge/-Cloud%20Run-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
+![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Cloudflare Pages](https://img.shields.io/badge/-Cloudflare%20Pages-F38020?style=flat-square&logo=cloudflarepages&logoColor=white)
 
-### Data Engineering Stack
-- **Cloud Platforms**: AWS, Google Cloud Platform (GCP), Microsoft Azure
-- **ETL/ELT**: Apache Airflow, dbt
-- **Data Warehouses**: BigQuery, Redshift
-- **Data Lakes**: Apache Iceberg
-- **Query Engines**: Trino
-- **Streaming**: Apache Kafka, Fluentd
-- **Databases**: PostgreSQL, MongoDB, Redis
-- **Visualization**: Google Data Studio, Redash, Apache Superset
-- **ML/AI**: Scikit-learn
-- **Infrastructure & Deployment**: Ansible
+**Data & Modeling**
+![dbt](https://img.shields.io/badge/-dbt-FF694B?style=flat-square&logo=dbt&logoColor=white)
+![Looker Studio](https://img.shields.io/badge/-Looker%20Studio-4285F4?style=flat-square&logo=looker&logoColor=white)
+![Dagster](https://img.shields.io/badge/-Dagster-654FF0?style=flat-square&logo=dagster&logoColor=white)
 
-## 💼 Professional Experience
-- **Senior Data Engineer** - Building enterprise-scale data platforms and analytics solutions
-- **Multi-Cloud Architect** - Designing and implementing data infrastructure across AWS, GCP, and Azure
-- **DevOps Integration** - Streamlining data pipeline deployment using Ansible and containerization
-- **Real-time Analytics** - Developing streaming data solutions with Kafka and Fluentd
+**Working with**
+- **Ingestion**: Cloud Run Jobs + Cloud Scheduler (chosen over Airflow / Composer for cost), Cloud Build CI/CD
+- **Modeling**: dbt-bigquery, 3-tier raw / staging / marts pattern, append-only + `QUALIFY ROW_NUMBER()` dedup
+- **APIs**: Meta Graph API (Facebook / Instagram), Threads API (OAuth 2.0), YouTube Data API v3
+- **Secrets & auth**: GCP Secret Manager, OAuth 2.0 long-lived token refresh automation
+- **LLM-augmented pipelines**: Gemini API for classification (in progress), BigQuery Vector Search (planned)
+- **Other**: Poetry, pytest, GitHub Actions
 
-## 🏗️ Notable Projects
-- **🚀 Multi-Cloud Data Lake**: Built unified data lake architecture using Apache Iceberg across multiple cloud providers
-- **📊 Real-time Analytics Platform**: Implemented end-to-end streaming analytics using Kafka, Trino, and Superset
-- **🔄 Automated Data Pipeline**: Developed CI/CD for data workflows using Ansible and containerized Airflow
-- **📈 Business Intelligence Dashboard**: Created comprehensive BI solution with Redash and Data Studio integration
+## 💼 What I've Shipped Recently
+- **Multi-platform social ingestion** — built end-to-end pipelines for **Facebook, Instagram, Threads, and YouTube** into BigQuery (15 Cloud Run Jobs on staggered Cloud Scheduler triggers), with a 3-tier raw / staging / marts dbt model (append-only + dedup-on-read for full historical snapshots). Powers Looker Studio dashboards used by editorial and marketing teams
+- **Threads OAuth 2.0, end-to-end** — dual-account 8-scope authorization, plus a weekly Cloud Run Job that auto-refreshes the 60-day token through Secret Manager. Upgraded the original "alert + manual re-auth" design into a fully unattended one
+- **Self-serve OAuth UX for non-engineers** — pure-frontend authorization helper on Cloudflare Pages so social-team editors can grant API access without engineering hand-holding
+- **Inherited pipeline rewrite** — took over a Composer + Apps Script revenue pipeline; replaced it with BigQuery External Tables + Scheduled Queries, **cutting monthly cost from ~USD$300 to under $1** with no loss of functionality
+- **Orchestration decision** — explicitly skipped managed Airflow (Composer) on cost grounds; chose Cloud Scheduler + Cloud Run Jobs for the current scale, with a documented migration path to Dagster when the workload justifies it
 
-## 🎓 Certifications
-- **Cloud Platform Certifications** (AWS/GCP/Azure)
-- **Data Engineering Specializations**
-- **Kubernetes & Container Orchestration**
+## 🌱 Open Source Contributions
+- **[openclaw/openclaw#84890](https://github.com/openclaw/openclaw/pull/84890)** *(Merged May 2026)* — Root-caused a SIGUSR1-listener / dynamic-import deadlock that left the gateway unable to restart after in-place package upgrades. Shipped a +28 / −1 surgical fix (eager-load lifecycle runtime + listener `.catch`) backed by production logs and a live `kill -USR1` reproduction on the patched build.
+
+## 🏆 Current Focus
+- 🧪 **LLM-augmented data pipelines** — using Gemini API for comment sentiment and post topic classification, surfaced as `fct_comments_sentiment` / `fct_post_topics` marts
+- 🔎 **BigQuery Vector Search** for an editorial content pipeline (ES → BQ embeddings) so editors can do semantic search over historical archives
+- 🛡️ **Silent failure detection** — dbt source freshness + Cloud Monitoring alerts so a broken upstream API can't go undetected for days
+- 🎼 **Migrating orchestration to Dagster** when scale justifies it (Airflow vs Dagster trade-offs already evaluated and documented)
+- 💰 **Cost discipline** — every new component gets a back-of-envelope monthly-cost estimate before it ships
 
 ## 📞 Connect with Me
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hsiao-yu-tung-67547a119/)
@@ -57,17 +67,9 @@
 [![Medium](https://img.shields.io/badge/-Medium-12100E?style=flat-square&logo=medium&logoColor=white)](https://medium.com/@myps6415)
 
 ## 📊 My Status
-![GitHub Stats](https://my-github-stats-git-main-myps6415s-projects.vercel.app/api?username=myps6415&count_private=true&show_icons=true&theme=radical)
 
-![Top Languages](https://my-github-stats-git-main-myps6415s-projects.vercel.app/api/top-langs/?username=myps6415&layout=compact&theme=radical)
+<p align="center">
+  <img height="180" src="https://my-github-stats-git-main-myps6415s-projects.vercel.app/api?username=myps6415&count_private=true&show_icons=true&theme=radical" alt="GitHub Stats" />
+  <img height="180" src="https://my-github-stats-git-main-myps6415s-projects.vercel.app/api/top-langs/?username=myps6415&layout=compact&theme=radical" alt="Top Languages" />
+</p>
 
-## 🏆 Current Focus
-- 🔥 Building real-time data streaming solutions with advanced Kafka configurations
-- 🤖 Researching AI integration in data engineering workflows and LLM applications
-- 🧠 Exploring MLOps and automated model deployment strategies
-- ⚡ Optimizing data pipeline performance and cost efficiency across multi-cloud environments
-- 🌱 Contributing to open source data engineering projects and AI tools
-- 📊 Investigating modern data mesh architectures and decentralized data platforms
-
----
-*"Data is the new oil, but insights are the refined fuel that powers decisions."*
