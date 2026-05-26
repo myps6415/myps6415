@@ -13,6 +13,9 @@
 ## 🚀 About Me
 - 🌏 Based in Taiwan, working as a Principal Data Engineer at a media group
 - 🛠️ Building the social analytics data platform from the ground up — ingestion, modeling, dashboards, deployment, docs
+- 🧰 Production work across **GCP, AWS, and Azure**; orchestration with **Airflow** and **Dagster**; data processing with **PySpark** — current GCP-lean stack is chosen by fit, not by habit
+- 👥 Previously **Data Team Lead** for 2.5 years (Scrum, mentoring, hiring, vendor coordination) before switching back to a hands-on Principal IC role
+- 🔬 Came up through text mining, NLP, and sentiment analysis on Chinese-language corpora — direct context for the current LLM-augmented pipeline work
 - 🎯 Bias toward **lean, observable, cost-disciplined** data stacks (BigQuery + Cloud Run Jobs + dbt) over heavy orchestrators
 - 🔍 Spend equal time on data modeling and on the boring infra that keeps tokens fresh, jobs idempotent, and bills small
 - 📚 Currently going deep on LLM-augmented data pipelines (sentiment / topic classification) and vector search for editorial workflows
@@ -35,6 +38,15 @@
 ![Looker Studio](https://img.shields.io/badge/-Looker%20Studio-4285F4?style=flat-square&logo=looker&logoColor=white)
 ![Dagster](https://img.shields.io/badge/-Dagster-654FF0?style=flat-square&logo=dagster&logoColor=white)
 
+**Also worked with**
+![AWS](https://img.shields.io/badge/-AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white)
+![Azure](https://img.shields.io/badge/-Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)
+![Airflow](https://img.shields.io/badge/-Airflow-017CEE?style=flat-square&logo=apacheairflow&logoColor=white)
+![PySpark](https://img.shields.io/badge/-PySpark-E25A1C?style=flat-square&logo=apachespark&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/-Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
+![Apache Iceberg](https://img.shields.io/badge/-Apache%20Iceberg-2D7DD2?style=flat-square&logo=apacheiceberg&logoColor=white)
+![Fluentd](https://img.shields.io/badge/-Fluentd-0E83C8?style=flat-square&logo=fluentd&logoColor=white)
+
 <details>
 <summary><b>Working with</b> — patterns and tools I reach for</summary>
 
@@ -43,6 +55,7 @@
 - **APIs**: Meta Graph API (Facebook / Instagram), Threads API (OAuth 2.0), YouTube Data API v3
 - **Secrets & auth**: GCP Secret Manager, OAuth 2.0 long-lived token refresh automation
 - **LLM-augmented pipelines**: Gemini API for classification (in progress), BigQuery Vector Search (planned)
+- **Past production**: GKE-hosted Fluentd telemetry at high QPS, Apache Iceberg + Spark data lake, multi-cloud (AWS ↔ GCP) ETL with Ansible-driven deployment, classical ML (XGBoost / RandomForest / SVM) for user-segment prediction
 - **Other**: Poetry, pytest, GitHub Actions
 
 </details>
