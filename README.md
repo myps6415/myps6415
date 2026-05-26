@@ -69,10 +69,3 @@
 [![Email](https://img.shields.io/badge/-Email-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:myps6415@gmail.com)
 [![Medium](https://img.shields.io/badge/-Medium-12100E?style=flat-square&logo=medium&logoColor=white)](https://medium.com/@myps6415)
 
-## 📊 My Status
-
-<p align="center">
-  <img height="180" src="https://my-github-stats-git-main-myps6415s-projects.vercel.app/api?username=myps6415&count_private=true&show_icons=true&theme=radical" alt="GitHub Stats" />
-  <img height="180" src="https://my-github-stats-git-main-myps6415s-projects.vercel.app/api/top-langs/?username=myps6415&layout=compact&theme=radical" alt="Top Languages" />
-</p>
-
