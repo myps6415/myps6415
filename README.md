@@ -4,7 +4,6 @@
 
 ### Principal Data Engineer · Modern Data Stack on GCP · OSS Contributor
 
-[![Profile views](https://komarev.com/ghpvc/?username=myps6415&label=Profile%20views&color=0e75b6&style=flat-square)](https://github.com/myps6415)
 [![Github](https://img.shields.io/github/followers/myps6415?label=Follow&style=social)](https://github.com/myps6415)
 
 </div>
@@ -36,7 +35,9 @@
 ![Looker Studio](https://img.shields.io/badge/-Looker%20Studio-4285F4?style=flat-square&logo=looker&logoColor=white)
 ![Dagster](https://img.shields.io/badge/-Dagster-654FF0?style=flat-square&logo=dagster&logoColor=white)
 
-**Working with**
+<details>
+<summary><b>Working with</b> — patterns and tools I reach for</summary>
+
 - **Ingestion**: Cloud Run Jobs + Cloud Scheduler (chosen over Airflow / Composer for cost), Cloud Build CI/CD
 - **Modeling**: dbt-bigquery, 3-tier raw / staging / marts pattern, append-only + `QUALIFY ROW_NUMBER()` dedup
 - **APIs**: Meta Graph API (Facebook / Instagram), Threads API (OAuth 2.0), YouTube Data API v3
@@ -44,22 +45,24 @@
 - **LLM-augmented pipelines**: Gemini API for classification (in progress), BigQuery Vector Search (planned)
 - **Other**: Poetry, pytest, GitHub Actions
 
-## 💼 What I've Shipped Recently
-- **Multi-platform social ingestion** — built end-to-end pipelines for **Facebook, Instagram, Threads, and YouTube** into BigQuery (15 Cloud Run Jobs on staggered Cloud Scheduler triggers), with a 3-tier raw / staging / marts dbt model (append-only + dedup-on-read for full historical snapshots). Powers Looker Studio dashboards used by editorial and marketing teams
+</details>
+
+## 💼 Recent Work
+
+**Shipped**
+- **Multi-platform social ingestion** — end-to-end pipelines for **Facebook, Instagram, Threads, and YouTube** into BigQuery (15 Cloud Run Jobs on staggered Cloud Scheduler triggers, append-only + dedup-on-read for full historical snapshots). Powers Looker Studio dashboards used by editorial and marketing teams
 - **Threads OAuth 2.0, end-to-end** — dual-account 8-scope authorization, plus a weekly Cloud Run Job that auto-refreshes the 60-day token through Secret Manager. Upgraded the original "alert + manual re-auth" design into a fully unattended one
 - **Self-serve OAuth UX for non-engineers** — pure-frontend authorization helper on Cloudflare Pages so social-team editors can grant API access without engineering hand-holding
 - **Inherited pipeline rewrite** — took over a Composer + Apps Script revenue pipeline; replaced it with BigQuery External Tables + Scheduled Queries, **cutting monthly cost from ~USD$300 to under $1** with no loss of functionality
 - **Orchestration decision** — explicitly skipped managed Airflow (Composer) on cost grounds; chose Cloud Scheduler + Cloud Run Jobs for the current scale, with a documented migration path to Dagster when the workload justifies it
 
-## 🌱 Open Source Contributions
-- **[openclaw/openclaw#84890](https://github.com/openclaw/openclaw/pull/84890)** *(Merged May 2026)* — Root-caused a SIGUSR1-listener / dynamic-import deadlock that left the gateway unable to restart after in-place package upgrades. Shipped a +28 / −1 surgical fix (eager-load lifecycle runtime + listener `.catch`) backed by production logs and a live `kill -USR1` reproduction on the patched build.
-
-## 🏆 Current Focus
-- 🧪 **LLM-augmented data pipelines** — using Gemini API for comment sentiment and post topic classification, surfaced as `fct_comments_sentiment` / `fct_post_topics` marts
+**In Flight**
+- 🧪 **LLM-augmented data pipelines** — Gemini API for comment sentiment and post topic classification, surfaced as `fct_comments_sentiment` / `fct_post_topics` marts
 - 🔎 **BigQuery Vector Search** for an editorial content pipeline (ES → BQ embeddings) so editors can do semantic search over historical archives
 - 🛡️ **Silent failure detection** — dbt source freshness + Cloud Monitoring alerts so a broken upstream API can't go undetected for days
-- 🎼 **Migrating orchestration to Dagster** when scale justifies it (Airflow vs Dagster trade-offs already evaluated and documented)
-- 💰 **Cost discipline** — every new component gets a back-of-envelope monthly-cost estimate before it ships
+
+## 🌱 Open Source Contributions
+- **[openclaw/openclaw#84890](https://github.com/openclaw/openclaw/pull/84890)** *(Merged May 2026)* — Root-caused a SIGUSR1-listener / dynamic-import deadlock that left the gateway unable to restart after in-place package upgrades. Shipped a +28 / −1 surgical fix (eager-load lifecycle runtime + listener `.catch`) backed by production logs and a live `kill -USR1` reproduction on the patched build.
 
 ## 📞 Connect with Me
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hsiao-yu-tung-67547a119/)
