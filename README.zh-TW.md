@@ -75,7 +75,7 @@
 **進行中**
 - 🧪 **LLM 強化資料流** — 以 Gemini API 處理留言情感與貼文主題分類，產出 `fct_comments_sentiment` / `fct_post_topics` 資料市集
 - 🔎 **BigQuery Vector Search** — 編輯內容資料流（ES → BQ embeddings），讓編輯能對歷史檔案做語意搜尋
-- 📊 **GA4 / Analytics Data API** — 接入 ctee.com.tw 網站分析；輔助教學頁已就緒，待 GA4 管理者把服務帳號加為「檢視者」
+- 📊 **GA4 / Analytics Data API** — 接入集團新聞網站流量分析；輔助教學頁已就緒，待對方 GA4 管理者把服務帳號加為「檢視者」
 
 ## 🌱 開源貢獻
 - **[openclaw/openclaw#87291](https://github.com/openclaw/openclaw/issues/87291)** *(2026 年 5 月提報・於 PR #87311 修復)* — 診斷出 OpenClaw 回覆上下文 sanitizer 的 500 字元靜默截斷問題（一個上限同時套用於短的 metadata 欄位與多段落的機器人回覆內文），導致閒置 session 重置後尾段內容被切除，Telegram 使用者遭遇「失憶」的機器人卻看不到任何錯誤訊息。提交原始碼層級的根因分析，以及以實際部署數據為依據的拆分上限 diff；修復 PR 採納了此提案。[完整事後檢討 →](https://myps6415.github.io/zh/blog/openclaw-issue87291-postmortem)

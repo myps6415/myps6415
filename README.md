@@ -75,7 +75,7 @@
 **In Flight**
 - 🧪 **LLM-augmented data pipelines** — Gemini API for comment sentiment and post topic classification, surfaced as `fct_comments_sentiment` / `fct_post_topics` marts
 - 🔎 **BigQuery Vector Search** for an editorial content pipeline (ES → BQ embeddings) so editors can do semantic search over historical archives
-- 📊 **GA4 / Analytics Data API** — adding ctee.com.tw web analytics; helper page shipped, waiting on the GA4 admin to grant the service account Viewer access
+- 📊 **GA4 / Analytics Data API** — adding a news site's web analytics; helper page shipped, waiting on the GA4 admin to grant the service account Viewer access
 
 ## 🌱 Open Source Contributions
 - **[openclaw/openclaw#87291](https://github.com/openclaw/openclaw/issues/87291)** *(Filed May 2026 · fix in PR #87311)* — Diagnosed a silent 500-character truncation in OpenClaw's reply-context sanitizer (one cap shared across short metadata fields *and* multi-paragraph bot bodies), which clobbered tail content after idle session reset and left Telegram users with "amnesiac" bots and no error trace. Filed source-level root cause + a concrete split-cap diff backed by real deployment numbers; the fix PR adopts the proposed change. [Full postmortem →](https://myps6415.github.io/blog/openclaw-issue87291-postmortem)
