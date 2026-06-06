@@ -58,7 +58,7 @@
 - **機敏資料與授權**：GCP Secret Manager、OAuth 2.0 長效 token 自動續期
 - **LLM 強化資料流**：Gemini API 分類（進行中）、BigQuery Vector Search（規劃中）
 - **過去正式環境經驗**：高 QPS 的 GKE Fluentd 遙測、Apache Iceberg + Spark 資料湖、跨雲 (AWS ↔ GCP) ETL 搭配 Ansible 部署、傳統 ML (XGBoost / RandomForest / SVM) 用於使用者分群預測
-- **其他**：Poetry、pytest、GitHub Actions
+- **其他**：Poetry、pytest、ruff（CI lint + format）、GitHub Actions、SendGrid / SMTP 週報寄信
 
 </details>
 
@@ -70,11 +70,12 @@
 - **非工程師也能自助操作的 OAuth 介面** — 部署於 Cloudflare Pages 的純前端授權輔助工具，讓社群團隊編輯不需工程師協助即可完成 API 授權
 - **接手資料流重寫** — 接手既有的 Composer + Apps Script 營收資料流，改以 BigQuery External Tables + Scheduled Queries 重寫，**月成本從約 USD$300 壓到不到 $1**，功能完整保留
 - **編排工具選型** — 基於成本考量明確避開 managed Airflow (Composer)，以目前規模選用 Cloud Scheduler + Cloud Run Jobs，並備妥工作負載成長後遷移至 Dagster 的路徑文件
+- **靜默失敗偵測** — dbt source freshness（25h warn／49h error）結合 Cloud Monitoring（regex 比對任務失敗）告警，避免上游 API 異常或任務崩潰多日無人發現
 
 **進行中**
 - 🧪 **LLM 強化資料流** — 以 Gemini API 處理留言情感與貼文主題分類，產出 `fct_comments_sentiment` / `fct_post_topics` 資料市集
 - 🔎 **BigQuery Vector Search** — 編輯內容資料流（ES → BQ embeddings），讓編輯能對歷史檔案做語意搜尋
-- 🛡️ **靜默失敗偵測** — dbt source freshness 結合 Cloud Monitoring 通知，避免上游 API 異常多日無人發現
+- 📊 **GA4 / Analytics Data API** — 接入 ctee.com.tw 網站分析；輔助教學頁已就緒，待 GA4 管理者把服務帳號加為「檢視者」
 
 ## 🌱 開源貢獻
 - **[openclaw/openclaw#87291](https://github.com/openclaw/openclaw/issues/87291)** *(2026 年 5 月提報・於 PR #87311 修復)* — 診斷出 OpenClaw 回覆上下文 sanitizer 的 500 字元靜默截斷問題（一個上限同時套用於短的 metadata 欄位與多段落的機器人回覆內文），導致閒置 session 重置後尾段內容被切除，Telegram 使用者遭遇「失憶」的機器人卻看不到任何錯誤訊息。提交原始碼層級的根因分析，以及以實際部署數據為依據的拆分上限 diff；修復 PR 採納了此提案。[完整事後檢討 →](https://myps6415.github.io/zh/blog/openclaw-issue87291-postmortem)

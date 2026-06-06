@@ -58,7 +58,7 @@
 - **Secrets & auth**: GCP Secret Manager, OAuth 2.0 long-lived token refresh automation
 - **LLM-augmented pipelines**: Gemini API for classification (in progress), BigQuery Vector Search (planned)
 - **Past production**: GKE-hosted Fluentd telemetry at high QPS, Apache Iceberg + Spark data lake, multi-cloud (AWS ↔ GCP) ETL with Ansible-driven deployment, classical ML (XGBoost / RandomForest / SVM) for user-segment prediction
-- **Other**: Poetry, pytest, GitHub Actions
+- **Other**: Poetry, pytest, ruff (lint + format in CI), GitHub Actions, SendGrid / SMTP for weekly email reports
 
 </details>
 
@@ -70,11 +70,12 @@
 - **Self-serve OAuth UX for non-engineers** — pure-frontend authorization helper on Cloudflare Pages so social-team editors can grant API access without engineering hand-holding
 - **Inherited pipeline rewrite** — took over a Composer + Apps Script revenue pipeline; replaced it with BigQuery External Tables + Scheduled Queries, **cutting monthly cost from ~USD$300 to under $1** with no loss of functionality
 - **Orchestration decision** — explicitly skipped managed Airflow (Composer) on cost grounds; chose Cloud Scheduler + Cloud Run Jobs for the current scale, with a documented migration path to Dagster when the workload justifies it
+- **Silent failure detection** — dbt source freshness (25h warn / 49h error) + Cloud Monitoring alerts on regex-matched job failures, so a broken upstream API or crashed job can't go undetected for days
 
 **In Flight**
 - 🧪 **LLM-augmented data pipelines** — Gemini API for comment sentiment and post topic classification, surfaced as `fct_comments_sentiment` / `fct_post_topics` marts
 - 🔎 **BigQuery Vector Search** for an editorial content pipeline (ES → BQ embeddings) so editors can do semantic search over historical archives
-- 🛡️ **Silent failure detection** — dbt source freshness + Cloud Monitoring alerts so a broken upstream API can't go undetected for days
+- 📊 **GA4 / Analytics Data API** — adding ctee.com.tw web analytics; helper page shipped, waiting on the GA4 admin to grant the service account Viewer access
 
 ## 🌱 Open Source Contributions
 - **[openclaw/openclaw#87291](https://github.com/openclaw/openclaw/issues/87291)** *(Filed May 2026 · fix in PR #87311)* — Diagnosed a silent 500-character truncation in OpenClaw's reply-context sanitizer (one cap shared across short metadata fields *and* multi-paragraph bot bodies), which clobbered tail content after idle session reset and left Telegram users with "amnesiac" bots and no error trace. Filed source-level root cause + a concrete split-cap diff backed by real deployment numbers; the fix PR adopts the proposed change. [Full postmortem →](https://myps6415.github.io/blog/openclaw-issue87291-postmortem)
