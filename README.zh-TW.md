@@ -78,7 +78,7 @@
 - 📊 **GA4 / Analytics Data API** — 接入集團新聞網站流量分析；輔助教學頁已就緒，待對方 GA4 管理者把服務帳號加為「檢視者」
 
 ## 🌱 開源貢獻
-- **[openclaw/openclaw#87291](https://github.com/openclaw/openclaw/issues/87291)** *(2026 年 5 月提報・於 PR #87311 修復)* — 診斷出 OpenClaw 回覆上下文 sanitizer 的 500 字元靜默截斷問題（一個上限同時套用於短的 metadata 欄位與多段落的機器人回覆內文），導致閒置 session 重置後尾段內容被切除，Telegram 使用者遭遇「失憶」的機器人卻看不到任何錯誤訊息。提交原始碼層級的根因分析，以及以實際部署數據為依據的拆分上限 diff；修復 PR 採納了此提案。[完整事後檢討 →](https://myps6415.github.io/zh/blog/openclaw-issue87291-postmortem)
+- **[openclaw/openclaw#87291](https://github.com/openclaw/openclaw/issues/87291)** *(2026 年 5 月提報)* — 提交 OpenClaw 回覆上下文 sanitizer 的 500 字元靜默截斷根因：一個上限同時套用於短的 metadata 欄位與多段落的機器人回覆內文，導致閒置 session 重置後尾段內容被切除，Telegram 使用者遭遇「失憶」的機器人卻看不到任何錯誤訊息。提出將 body cap 從 field cap 拆分；maintainer 後續以更完整的變體落地相同的拆分方向 —— head+tail 截斷搭配 ReplyChain / inline ReplyToBody 路徑覆蓋，落地於 commit [`3753c5e2c8`](https://github.com/openclaw/openclaw/commit/3753c5e2c8)。[完整事後檢討 →](https://myps6415.github.io/zh/blog/openclaw-issue87291-postmortem)
 - **[openclaw/openclaw#84890](https://github.com/openclaw/openclaw/pull/84890)** *(2026 年 5 月合併)* — 找出 SIGUSR1 listener 與動態 import 之間的死結，這個問題讓 gateway 在原地套件升級後無法重啟。提交 +28 / −1 的精準修復（提前載入 lifecycle runtime + listener 加上 `.catch`），佐以正式環境日誌與已修補版本上的 `kill -USR1` 重現驗證。[完整事後檢討 →](https://myps6415.github.io/zh/blog/openclaw-pr84890-postmortem)
 
 ## 📞 聯絡方式
