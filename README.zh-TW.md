@@ -71,6 +71,7 @@
 - **接手資料流重寫** — 接手既有的 Composer + Apps Script 營收資料流，改以 BigQuery External Tables + Scheduled Queries 重寫，**月成本從約 USD$300 壓到不到 $1**，功能完整保留
 - **編排工具選型** — 基於成本考量明確避開 managed Airflow (Composer)，以目前規模選用 Cloud Scheduler + Cloud Run Jobs，並備妥工作負載成長後遷移至 Dagster 的路徑文件
 - **靜默失敗偵測** — dbt source freshness（25h warn／49h error）結合 Cloud Monitoring（regex 比對任務失敗）告警，避免上游 API 異常或任務崩潰多日無人發現
+- **個人自動化自架遷移** *(2026 年 6 月)* — 把 Zeabur 上的 n8n workflow（每日家庭行程提醒推 LINE）改寫成 178 行純 stdlib Python 腳本，搭配本地 OpenClaw cron 排程，**月費從 USD$7.88 降到 $0**，與機器上已在跑的另外二十個 cron job 共用一套排程系統。重寫的副作用是修掉一個全日事件會炸的潛在 bug。[完整遷移筆記 →](https://myps6415.github.io/zh/blog/from-n8n-zeabur-to-openclaw-local)
 
 **進行中**
 - 🧪 **LLM 強化資料流** — 以 Gemini API 處理留言情感與貼文主題分類，產出 `fct_comments_sentiment` / `fct_post_topics` 資料市集
