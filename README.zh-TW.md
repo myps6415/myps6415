@@ -8,6 +8,8 @@
 
 🌐 [English](README.md) · **中文**
 
+📄 **[全遠端求職 one-pager →](https://myps6415.github.io/zh/cv)** · 開放全遠端職缺
+
 </div>
 
 ---
@@ -56,7 +58,7 @@
 - **建模**：dbt-bigquery、raw / staging / marts 三層架構、append-only 搭配 `QUALIFY ROW_NUMBER()` 去重
 - **API 串接**：Meta Graph API (Facebook / Instagram)、Threads API (OAuth 2.0)、YouTube Data API v3
 - **機敏資料與授權**：GCP Secret Manager、OAuth 2.0 長效 token 自動續期
-- **LLM 強化資料流**：Gemini API 分類（進行中）、BigQuery Vector Search（規劃中）
+- **LLM 強化資料流**：Gemini API 分類（已上線）、BigQuery Vector Search（規劃中）
 - **過去正式環境經驗**：高 QPS 的 GKE Fluentd 遙測、Apache Iceberg + Spark 資料湖、跨雲 (AWS ↔ GCP) ETL 搭配 Ansible 部署、傳統 ML (XGBoost / RandomForest / SVM) 用於使用者分群預測
 - **其他**：Poetry、pytest、ruff（CI lint + format）、GitHub Actions、SendGrid / SMTP 週報寄信
 
@@ -65,18 +67,19 @@
 ## 💼 近期工作
 
 **已上線**
-- **多平台社群資料擷取** — **Facebook、Instagram、Threads、YouTube** 端到端寫入 BigQuery 的資料流（15 個 Cloud Run Jobs 由錯峰的 Cloud Scheduler 觸發、append-only 搭配讀取時去重以保留完整歷史快照）。撐起編輯與行銷團隊使用的 Looker Studio 儀表板
+- **多平台社群資料擷取** — **Facebook、Instagram、Threads、YouTube** 端到端寫入 BigQuery 的資料流（15 個 Cloud Run Jobs 由錯峰的 Cloud Scheduler 觸發、append-only 搭配讀取時去重以保留完整歷史）。撐起編輯與行銷團隊使用的 Looker Studio 儀表板
 - **Threads OAuth 2.0 全流程** — 雙帳號 8-scope 授權，搭配每週執行的 Cloud Run Job 透過 Secret Manager 自動續期 60 天有效期 token。將原本「主動通知 + 人工重新授權」的設計升級為完全免人工介入的自動化流程
 - **非工程師也能自助操作的 OAuth 介面** — 部署於 Cloudflare Pages 的純前端授權輔助工具，讓社群團隊編輯不需工程師協助即可完成 API 授權
 - **接手資料流重寫** — 接手既有的 Composer + Apps Script 營收資料流，改以 BigQuery External Tables + Scheduled Queries 重寫，**月成本從約 USD$300 壓到不到 $1**，功能完整保留
 - **編排工具選型** — 基於成本考量明確避開 managed Airflow (Composer)，以目前規模選用 Cloud Scheduler + Cloud Run Jobs，並備妥工作負載成長後遷移至 Dagster 的路徑文件
 - **靜默失敗偵測** — dbt source freshness（25h warn／49h error）結合 Cloud Monitoring（regex 比對任務失敗）告警，避免上游 API 異常或任務崩潰多日無人發現
 - **個人自動化自架遷移** *(2026 年 6 月)* — 把 Zeabur 上的 n8n workflow（每日家庭行程提醒推 LINE）改寫成 178 行純 stdlib Python 腳本，搭配本地 OpenClaw cron 排程，**月費從 USD$7.88 降到 $0**；本地 OpenClaw 用了一段時間後，這個託管 workflow 變得多餘。重寫的副作用是修掉一個全日事件會炸的潛在 bug。[完整遷移筆記 →](https://myps6415.github.io/zh/blog/from-n8n-zeabur-to-openclaw-local)
+- **LLM 強化資料流** — 以 BigQuery 內建 Gemini（`AI.GENERATE`）處理留言情感與貼文主題分類，產出 `fct_comments_sentiment` / `fct_post_topics` 資料市集供 dashboard 與分析師直接查；另以 `ai_cache` 把按需推論成本壓在固定低值
+- **GA4 網站分析 ingestion** — 集團官網與 App 流量透過 GA4 Data API 接入（4 個 Cloud Run Jobs + 文章排行 `fct_ga_story`）；非工程師要開的「檢視者」授權走 Cloudflare Pages 自助頁
 
 **進行中**
-- 🧪 **LLM 強化資料流** — 以 Gemini API 處理留言情感與貼文主題分類，產出 `fct_comments_sentiment` / `fct_post_topics` 資料市集
-- 🔎 **BigQuery Vector Search** — 編輯內容資料流（ES → BQ embeddings），讓編輯能對歷史檔案做語意搜尋
-- 📊 **GA4 / Analytics Data API** — 接入集團新聞網站流量分析；輔助教學頁已就緒，待對方 GA4 管理者把服務帳號加為「檢視者」
+- 🔎 **編輯台語意搜尋** — 評估 BigQuery Vector Search 與 self-host Elasticsearch（ES → BQ embeddings），讓編輯對歷史文章做語意搜尋
+- 🧹 **遷移收尾** — 新架構已出數，正把最後一條營收 pipeline 從舊的 Composer DAG / Apps Script 完全下線
 
 ## 🌱 開源貢獻
 - **[openclaw/openclaw#87291](https://github.com/openclaw/openclaw/issues/87291)** *(2026 年 5 月提報)* — 提交 OpenClaw 回覆上下文 sanitizer 的 500 字元靜默截斷根因：一個上限同時套用於短的 metadata 欄位與多段落的機器人回覆內文，導致閒置 session 重置後尾段內容被切除，Telegram 使用者遭遇「失憶」的機器人卻看不到任何錯誤訊息。提出將 body cap 從 field cap 拆分；maintainer 後續以更完整的變體落地相同的拆分方向 —— head+tail 截斷搭配 ReplyChain / inline ReplyToBody 路徑覆蓋，落地於 commit [`3753c5e2c8`](https://github.com/openclaw/openclaw/commit/3753c5e2c8)。[完整事後檢討 →](https://myps6415.github.io/zh/blog/openclaw-issue87291-postmortem)
