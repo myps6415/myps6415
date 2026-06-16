@@ -54,12 +54,12 @@
 <summary><b>Working with</b> — patterns and tools I reach for</summary>
 
 - **Ingestion**: Cloud Run Jobs + Cloud Scheduler (chosen over Airflow / Composer for cost), Cloud Build CI/CD
-- **Modeling**: dbt-bigquery, 3-tier raw / staging / marts pattern, append-only + `QUALIFY ROW_NUMBER()` dedup
+- **Modeling**: dbt-bigquery — append-only raw ingestion, then dbt staging (views) / marts (tables) with `QUALIFY ROW_NUMBER()` dedup
 - **APIs**: Meta Graph API (Facebook / Instagram), Threads API (OAuth 2.0), YouTube Data API v3
 - **Secrets & auth**: GCP Secret Manager, OAuth 2.0 long-lived token refresh automation
 - **LLM-augmented pipelines**: Gemini API for classification (shipped), BigQuery Vector Search (planned)
 - **Past production**: GKE-hosted Fluentd telemetry at high QPS, Apache Iceberg + Spark data lake, multi-cloud (AWS ↔ GCP) ETL with Ansible-driven deployment, classical ML (XGBoost / RandomForest / SVM) for user-segment prediction
-- **Other**: Poetry, pytest, ruff (lint + format in CI), GitHub Actions, SendGrid / SMTP for weekly email reports
+- **Other**: Poetry, pytest, ruff (lint + format in CI), GitHub Actions, SendGrid / SMTP email-reporting framework
 
 </details>
 

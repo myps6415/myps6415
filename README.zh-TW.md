@@ -54,12 +54,12 @@
 <summary><b>常用模式與工具</b> — 我習慣選用的解法</summary>
 
 - **資料擷取**：Cloud Run Jobs + Cloud Scheduler（基於成本考量選用，而非 Airflow / Composer）、Cloud Build CI/CD
-- **建模**：dbt-bigquery、raw / staging / marts 三層架構、append-only 搭配 `QUALIFY ROW_NUMBER()` 去重
+- **建模**：dbt-bigquery — raw 層 append-only ingestion，再用 dbt 建 staging（view）/ marts（table），`QUALIFY ROW_NUMBER()` 去重
 - **API 串接**：Meta Graph API (Facebook / Instagram)、Threads API (OAuth 2.0)、YouTube Data API v3
 - **機敏資料與授權**：GCP Secret Manager、OAuth 2.0 長效 token 自動續期
 - **LLM 強化資料流**：Gemini API 分類（已上線）、BigQuery Vector Search（規劃中）
 - **過去正式環境經驗**：高 QPS 的 GKE Fluentd 遙測、Apache Iceberg + Spark 資料湖、跨雲 (AWS ↔ GCP) ETL 搭配 Ansible 部署、傳統 ML (XGBoost / RandomForest / SVM) 用於使用者分群預測
-- **其他**：Poetry、pytest、ruff（CI lint + format）、GitHub Actions、SendGrid / SMTP 週報寄信
+- **其他**：Poetry、pytest、ruff（CI lint + format）、GitHub Actions、SendGrid / SMTP 郵件報表框架
 
 </details>
 
