@@ -17,7 +17,7 @@
 ## 🚀 關於我
 - 🌏 在台灣，於媒體集團擔任 Principal Data Engineer
 - 🛠️ 從零打造社群分析資料平台 — 涵蓋資料擷取、建模、儀表板、部署、文件
-- 🧰 在 **GCP、AWS、Azure** 都有正式環境經驗；排程編排用過 **Airflow** 與 **Dagster**；資料處理用過 **PySpark** — 目前偏向 GCP 是出於適配考量，而非習慣
+- 🧰 在 **GCP、AWS、Azure** 都有正式環境經驗；排程編排用過 **Airflow**；資料處理用過 **PySpark** — 目前偏向 GCP 是出於適配考量，而非習慣
 - 👥 過去曾擔任 **資料團隊 Team Lead 2.5 年**（Scrum、人員培育、招募、廠商協作），之後回到動手做的 Principal IC（個人貢獻者）角色
 - 🔬 出身於中文文本探勘、NLP 與情感分析，與目前的 LLM 強化資料流工作直接接軌
 - 🎯 偏好 **精簡、可觀測、成本可控** 的資料堆疊（BigQuery + Cloud Run Jobs + dbt），而非重型編排工具
@@ -40,7 +40,6 @@
 **資料與建模**
 ![dbt](https://img.shields.io/badge/-dbt-FF694B?style=flat-square&logo=dbt&logoColor=white)
 ![Looker Studio](https://img.shields.io/badge/-Looker%20Studio-4285F4?style=flat-square&logo=looker&logoColor=white)
-![Dagster](https://img.shields.io/badge/-Dagster-654FF0?style=flat-square&logo=dagster&logoColor=white)
 
 **也使用過**
 ![AWS](https://img.shields.io/badge/-AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white)

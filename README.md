@@ -17,7 +17,7 @@
 ## 🚀 About Me
 - 🌏 Based in Taiwan, working as a Principal Data Engineer at a media group
 - 🛠️ Building the social analytics data platform from the ground up — ingestion, modeling, dashboards, deployment, docs
-- 🧰 Production work across **GCP, AWS, and Azure**; orchestration with **Airflow** and **Dagster**; data processing with **PySpark** — current GCP-lean stack is chosen by fit, not by habit
+- 🧰 Production work across **GCP, AWS, and Azure**; orchestration with **Airflow**; data processing with **PySpark** — current GCP-lean stack is chosen by fit, not by habit
 - 👥 Previously **Data Team Lead** for 2.5 years (Scrum, mentoring, hiring, vendor coordination) before switching back to a hands-on Principal IC role
 - 🔬 Came up through text mining, NLP, and sentiment analysis on Chinese-language corpora — direct context for the current LLM-augmented pipeline work
 - 🎯 Bias toward **lean, observable, cost-disciplined** data stacks (BigQuery + Cloud Run Jobs + dbt) over heavy orchestrators
@@ -40,7 +40,6 @@
 **Data & Modeling**
 ![dbt](https://img.shields.io/badge/-dbt-FF694B?style=flat-square&logo=dbt&logoColor=white)
 ![Looker Studio](https://img.shields.io/badge/-Looker%20Studio-4285F4?style=flat-square&logo=looker&logoColor=white)
-![Dagster](https://img.shields.io/badge/-Dagster-654FF0?style=flat-square&logo=dagster&logoColor=white)
 
 **Also worked with**
 ![AWS](https://img.shields.io/badge/-AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white)
