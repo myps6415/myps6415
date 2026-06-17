@@ -4,11 +4,11 @@
 
 ### Principal Data Engineer · Modern Data Stack on GCP · OSS Contributor
 
-[![Github](https://img.shields.io/github/followers/myps6415?label=Follow&style=social)](https://github.com/myps6415)
+[![Follow @myps6415 on GitHub](https://img.shields.io/badge/Follow-%40myps6415-181717?style=social&logo=github)](https://github.com/myps6415)
 
 🌐 **English** · [中文](README.zh-TW.md)
 
-📄 **[Remote-ready one-pager →](https://myps6415.github.io/cv?ref=github)** · open to fully-remote roles
+📄 **[View my CV →](https://myps6415.github.io/cv?ref=github)**
 
 </div>
 
@@ -57,7 +57,7 @@
 - **Modeling**: dbt-bigquery — append-only raw ingestion, then dbt staging (views) / marts (tables) with `QUALIFY ROW_NUMBER()` dedup
 - **APIs**: Meta Graph API (Facebook / Instagram), Threads API (OAuth 2.0), YouTube Data API v3
 - **Secrets & auth**: GCP Secret Manager, OAuth 2.0 long-lived token refresh automation
-- **LLM-augmented pipelines**: Gemini API for classification (shipped), BigQuery Vector Search (planned)
+- **LLM-augmented pipelines**: Gemini via BigQuery `AI.GENERATE` for classification (shipped), BigQuery Vector Search (planned)
 - **Past production**: GKE-hosted Fluentd telemetry at high QPS, Apache Iceberg + Spark data lake, multi-cloud (AWS ↔ GCP) ETL with Ansible-driven deployment, classical ML (XGBoost / RandomForest / SVM) for user-segment prediction
 - **Other**: Poetry, pytest, ruff (lint + format in CI), GitHub Actions, SendGrid / SMTP email-reporting framework
 
@@ -70,7 +70,7 @@
 - **Threads OAuth 2.0, end-to-end** — dual-account 8-scope authorization, plus a weekly Cloud Run Job that auto-refreshes the 60-day token through Secret Manager. Upgraded the original "alert + manual re-auth" design into a fully unattended one
 - **Self-serve OAuth UX for non-engineers** — pure-frontend authorization helper on Cloudflare Pages so social-team editors can grant API access without engineering hand-holding
 - **Inherited pipeline rewrite** — took over a Composer + Apps Script revenue pipeline; replaced it with BigQuery External Tables + Scheduled Queries, **cutting monthly cost from ~USD$300 to under $1** with no loss of functionality
-- **Orchestration decision** — explicitly skipped managed Airflow (Composer) on cost grounds; chose Cloud Scheduler + Cloud Run Jobs for the current scale, with a documented migration path to Dagster when the workload justifies it
+- **Orchestration decision** — explicitly skipped managed Airflow (Composer) on cost grounds; chose Cloud Scheduler + Cloud Run Jobs for the current scale, with a documented migration path to a dedicated orchestrator when the workload justifies it
 - **Silent failure detection** — dbt source freshness (25h warn / 49h error) + Cloud Monitoring alerts on regex-matched job failures, so a broken upstream API or crashed job can't go undetected for days
 - **Personal automation self-hosting** *(June 2026)* — Migrated a Zeabur-hosted n8n workflow (daily family-schedule alert pushed to LINE) to a 178-line stdlib Python script triggered by local OpenClaw cron, **dropping the $7.88/month bill to $0** once OpenClaw had been running long enough at home to make the hosted workflow redundant. Fixed a latent all-day-event crash bug as a side effect of the rewrite. [Full migration writeup →](https://myps6415.github.io/blog/from-n8n-zeabur-to-openclaw-local)
 - **LLM-augmented data pipelines** — Gemini (via BigQuery `AI.GENERATE`) for comment sentiment and post topic classification, surfaced as `fct_comments_sentiment` / `fct_post_topics` marts that dashboards and analysts query directly; an `ai_cache` keeps on-demand inference cost flat
@@ -79,6 +79,9 @@
 **In Flight**
 - 🔎 **Editorial semantic search** — evaluating BigQuery Vector Search vs. self-hosted Elasticsearch (ES → BQ embeddings) so editors can search the historical archive by meaning
 - 🧹 **Migration wrap-up** — the new architecture is already producing; decommissioning the last revenue pipeline off the old Composer DAG / Apps Script
+
+**Side Project**
+- **[realping.tw](https://realping.tw)** — a Taiwan real-floor-area (實坪) property-transaction database I built solo: dbt-duckdb cleans the government open data, then one shared query core serves it as both a REST API (FastAPI) and an MCP interface (FastMCP), with API keys / usage quotas, self-serve signup, an OAuth dashboard, and a Cloudflare edge guard; a LightGBM valuation model (median error ~12%) is built and held ready for when demand shows up. Live at [api](https://api.realping.tw) / [mcp](https://mcp.realping.tw).realping.tw
 
 ## 🌱 Open Source Contributions
 - **[openclaw/openclaw#87291](https://github.com/openclaw/openclaw/issues/87291)** *(Filed May 2026)* — Filed a source-level root cause for a silent 500-character truncation in OpenClaw's reply-context sanitizer: one cap covered both short metadata fields and multi-paragraph bot bodies, which clobbered tail content after idle session reset and left Telegram users with "amnesiac" bots and no error trace. Proposed splitting the body cap from the field cap; maintainers later landed a more sophisticated variant of the same split — head+tail truncation with additional ReplyChain / inline ReplyToBody coverage — in commit [`3753c5e2c8`](https://github.com/openclaw/openclaw/commit/3753c5e2c8). [Full postmortem →](https://myps6415.github.io/blog/openclaw-issue87291-postmortem)
