@@ -8,7 +8,7 @@
 
 🌐 [English](README.md) · **中文**
 
-📄 **[全遠端求職 one-pager →](https://myps6415.github.io/zh/cv)** · 開放全遠端職缺
+📄 **[全遠端求職 one-pager →](https://myps6415.github.io/zh/cv?ref=github)** · 開放全遠端職缺
 
 </div>
 

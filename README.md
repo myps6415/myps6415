@@ -8,7 +8,7 @@
 
 🌐 **English** · [中文](README.zh-TW.md)
 
-📄 **[Remote-ready one-pager →](https://myps6415.github.io/cv)** · open to fully-remote roles
+📄 **[Remote-ready one-pager →](https://myps6415.github.io/cv?ref=github)** · open to fully-remote roles
 
 </div>
 
