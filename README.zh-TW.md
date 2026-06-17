@@ -4,7 +4,7 @@
 
 ### Principal Data Engineer · GCP 現代資料堆疊 · 開源貢獻者
 
-[![Follow @myps6415 on GitHub](https://img.shields.io/badge/Follow-%40myps6415-181717?style=social&logo=github)](https://github.com/myps6415)
+⭐ **[在 GitHub 追蹤我 →](https://github.com/myps6415)**
 
 🌐 [English](README.md) · **中文**
 

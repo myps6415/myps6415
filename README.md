@@ -4,7 +4,7 @@
 
 ### Principal Data Engineer · Modern Data Stack on GCP · OSS Contributor
 
-[![Follow @myps6415 on GitHub](https://img.shields.io/badge/Follow-%40myps6415-181717?style=social&logo=github)](https://github.com/myps6415)
+⭐ **[Follow me on GitHub →](https://github.com/myps6415)**
 
 🌐 **English** · [中文](README.zh-TW.md)
 
