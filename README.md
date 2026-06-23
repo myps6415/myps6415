@@ -66,14 +66,14 @@
 ## 💼 Recent Work
 
 **Shipped**
-- **Multi-platform social ingestion** — end-to-end pipelines for **Facebook, Instagram, Threads, and YouTube** into BigQuery (15 Cloud Run Jobs on staggered Cloud Scheduler triggers, append-only + dedup-on-read for full history). Powers Looker Studio dashboards used by editorial and marketing teams
+- **Multi-platform social ingestion** — end-to-end pipelines for **Facebook, Instagram, Threads, and YouTube** into BigQuery (15 Cloud Run Jobs on staggered Cloud Scheduler triggers, append-only + dedup-on-read for full history). Powers Looker Studio dashboards used by editorial and marketing teams. A data-quality postmortem from this pipeline: [when a missing value must be NULL, not 0 →](https://myps6415.github.io/blog/null-not-zero)
 - **Threads OAuth 2.0, end-to-end** — dual-account 8-scope authorization, plus a weekly Cloud Run Job that auto-refreshes the 60-day token through Secret Manager. Upgraded the original "alert + manual re-auth" design into a fully unattended one
 - **Self-serve OAuth UX for non-engineers** — pure-frontend authorization helper on Cloudflare Pages so social-team editors can grant API access without engineering hand-holding
 - **Inherited pipeline rewrite** — took over a Composer + Apps Script revenue pipeline; replaced it with BigQuery External Tables + Scheduled Queries, **cutting monthly cost from ~USD$300 to under $1** with no loss of functionality
 - **Orchestration decision** — explicitly skipped managed Airflow (Composer) on cost grounds; chose Cloud Scheduler + Cloud Run Jobs for the current scale, with a documented migration path to a dedicated orchestrator when the workload justifies it
 - **Silent failure detection** — dbt source freshness (25h warn / 49h error) + Cloud Monitoring alerts on regex-matched job failures, so a broken upstream API or crashed job can't go undetected for days
 - **Personal automation self-hosting** *(June 2026)* — Migrated a Zeabur-hosted n8n workflow (daily family-schedule alert pushed to LINE) to a 178-line stdlib Python script triggered by local OpenClaw cron, **dropping the $7.88/month bill to $0** once OpenClaw had been running long enough at home to make the hosted workflow redundant. Fixed a latent all-day-event crash bug as a side effect of the rewrite. [Full migration writeup →](https://myps6415.github.io/blog/from-n8n-zeabur-to-openclaw-local)
-- **LLM-augmented data pipelines** — Gemini 2.5 Flash (via BigQuery `AI.GENERATE`) for comment sentiment and post topic classification, surfaced as `fct_comments_sentiment` / `fct_post_topics` marts that dashboards and analysts query directly; an `ai_cache` keeps on-demand inference cost flat
+- **LLM-augmented data pipelines** — Gemini 2.5 Flash (via BigQuery `AI.GENERATE`) for comment sentiment and post topic classification, surfaced as `fct_comments_sentiment` / `fct_post_topics` marts that dashboards and analysts query directly; an `ai_cache` keeps on-demand inference cost flat. [How I kept the bill from scaling with users →](https://myps6415.github.io/blog/llm-in-the-warehouse)
 - **GA4 web-analytics ingestion** — the group's site + app traffic pulled in through the GA4 Data API (4 Cloud Run Jobs + an `fct_ga_story` ranking mart); non-engineers grant Viewer access through a self-serve Cloudflare Pages page
 
 **In Flight**

@@ -66,14 +66,14 @@
 ## 💼 近期工作
 
 **已上線**
-- **多平台社群資料擷取** — **Facebook、Instagram、Threads、YouTube** 端到端寫入 BigQuery 的資料流（15 個 Cloud Run Jobs 由錯峰的 Cloud Scheduler 觸發、append-only 搭配讀取時去重以保留完整歷史）。撐起編輯與行銷團隊使用的 Looker Studio 儀表板
+- **多平台社群資料擷取** — **Facebook、Instagram、Threads、YouTube** 端到端寫入 BigQuery 的資料流（15 個 Cloud Run Jobs 由錯峰的 Cloud Scheduler 觸發、append-only 搭配讀取時去重以保留完整歷史）。撐起編輯與行銷團隊使用的 Looker Studio 儀表板。這條 pipeline 的一則資料品質事後檢討：[缺值該存 NULL、不該存 0 →](https://myps6415.github.io/zh/blog/null-not-zero)
 - **Threads OAuth 2.0 全流程** — 雙帳號 8-scope 授權，搭配每週執行的 Cloud Run Job 透過 Secret Manager 自動續期 60 天有效期 token。將原本「主動通知 + 人工重新授權」的設計升級為完全免人工介入的自動化流程
 - **非工程師也能自助操作的 OAuth 介面** — 部署於 Cloudflare Pages 的純前端授權輔助工具，讓社群團隊編輯不需工程師協助即可完成 API 授權
 - **接手資料流重寫** — 接手既有的 Composer + Apps Script 營收資料流，改以 BigQuery External Tables + Scheduled Queries 重寫，**月成本從約 USD$300 壓到不到 $1**，功能完整保留
 - **編排工具選型** — 基於成本考量明確避開 managed Airflow (Composer)，以目前規模選用 Cloud Scheduler + Cloud Run Jobs，並備妥工作負載成長後遷移至專用 orchestrator 的路徑文件
 - **靜默失敗偵測** — dbt source freshness（25h warn／49h error）結合 Cloud Monitoring（regex 比對任務失敗）警示，避免上游 API 異常或任務崩潰多日無人發現
 - **個人自動化自架遷移** *(2026 年 6 月)* — 把 Zeabur 上的 n8n workflow（每日家庭行程提醒推 LINE）改寫成 178 行純 stdlib Python 腳本，搭配本地 OpenClaw cron 排程，**月費從 USD$7.88 降到 $0**；本地 OpenClaw 用了一段時間後，這個託管 workflow 變得多餘。重寫的副作用是修掉一個全日事件會炸的潛在 bug。[完整遷移筆記 →](https://myps6415.github.io/zh/blog/from-n8n-zeabur-to-openclaw-local)
-- **LLM 強化資料流** — 以 BigQuery 內建 Gemini 2.5 Flash（`AI.GENERATE`）處理留言情緒與貼文主題分類，產出 `fct_comments_sentiment` / `fct_post_topics` 資料市集供 dashboard 與分析師直接查；另以 `ai_cache` 把按需推論成本壓在固定低值
+- **LLM 強化資料流** — 以 BigQuery 內建 Gemini 2.5 Flash（`AI.GENERATE`）處理留言情緒與貼文主題分類，產出 `fct_comments_sentiment` / `fct_post_topics` 資料市集供 dashboard 與分析師直接查；另以 `ai_cache` 把按需推論成本壓在固定低值。[我怎麼讓帳單不隨使用者膨脹 →](https://myps6415.github.io/zh/blog/llm-in-the-warehouse)
 - **GA4 網站分析 ingestion** — 集團官網與 App 流量透過 GA4 Data API 接入（4 個 Cloud Run Jobs + 文章排行 `fct_ga_story`）；非工程師要開的「檢視者」授權走 Cloudflare Pages 自助頁
 
 **進行中**
