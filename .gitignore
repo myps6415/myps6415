@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+.DS_Store?
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors / IDEs
+.idea/
+*.swp
+*.swo
+*~
+.vscode/*
+!.vscode/extensions.json
+
+# Claude Code local config (machine-specific)
+.claude/settings.local.json
+
+# Logs / temp
+*.log
+*.tmp
