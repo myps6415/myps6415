@@ -22,6 +22,7 @@
 - 🔬 出身於中文文本探勘、NLP 與情感分析，與目前的 LLM 強化資料流工作直接接軌
 - 🎯 偏好 **精簡、可觀測、成本可控** 的資料堆疊（BigQuery + Cloud Run Jobs + dbt），而非重型編排工具
 - 🔍 一半時間花在資料建模，另一半花在那些不起眼但關鍵的基礎設施：讓 token 持續有效、任務具備冪等性、帳單維持精實
+- 🏠 用跟正職一樣的紀律經營 homelab——一台 MacBook server 跑多個 Docker stack（照片備份、監控、家庭 LINE AI 助手、自架 agent runtime），每個都有自己的巡檢 loop 看著
 - 📚 目前深耕 LLM 強化資料流（情感／主題分類）以及面向編輯工作流程的向量檢索
 
 ## 🛠️ 技術與工具
@@ -96,6 +97,7 @@
 - **編排工具選型** — 基於成本考量明確避開 managed Airflow (Composer)，以目前規模選用 Cloud Scheduler + Cloud Run Jobs，並備妥工作負載成長後遷移至專用 orchestrator 的路徑文件
 - **靜默失敗偵測** — dbt source freshness（25h warn／49h error）結合 Cloud Monitoring（regex 比對任務失敗）警示，避免上游 API 異常或任務崩潰多日無人發現
 - **個人自動化自架遷移** *(2026 年 6 月)* — 把 Zeabur 上的 n8n workflow（每日家庭行程提醒推 LINE）改寫成 178 行純 stdlib Python 腳本，搭配本地 OpenClaw cron 排程，**月費從 USD$7.88 降到 $0**；本地 OpenClaw 用了一段時間後，這個託管 workflow 變得多餘。重寫的副作用是修掉一個全日事件會炸的潛在 bug。[完整遷移筆記 →](https://myps6415.github.io/zh/blog/from-n8n-zeabur-to-openclaw-local)
+- **LINE 家庭 AI 助手＋六道巡檢 loop** *(2026 年 7 月)* — 自架在家用 server 的 LINE 群組 bot（FastAPI webhook 走 Cloudflare Tunnel 出去）：**14 個 function calling 工具**——天氣、報價、匯率、會真 @ 人的循環提醒、用「盤中時段＋報價新鮮度」雙閘門把關的到價警報（免維護假日表）、聊天回顧、看圖、長期記憶——結果以 LINE Flex 卡片＋一鍵追問呈現，全走免費 reply API 加買斷制 LLM，**每則訊息邊際成本 $0**。外面包了**六道住在 Docker 外面的獨立巡檢 loop**（存活哨兵、每日健康摘要、揪出「說好會提醒卻沒送」的交付稽核、每週驗證過完整性的備份、每天跑確定性斷言的回歸探針）——因為 webhook bot 最糟的失敗模式就是沉默。[系列筆記 →](https://myps6415.github.io/zh/blog/line-bot-family-assistant)
 - **這個站 → MDX content collection** *(2026 年 6 月)* — 把 blog 從每頁一個 Astro 檔遷成雙語 MDX content collection，並加上自架的 Sveltia CMS（Cloudflare Worker OAuth，$0）可在瀏覽器編輯。途中抓到兩個無聲 bug——一個保留欄位名會讓文章非決定性地消失、一個 CommonMark 規則不肯讓中文變粗體。[完整筆記 →](https://myps6415.github.io/zh/blog/migrating-to-mdx)
 - **LLM 強化資料流** — 以 BigQuery 內建 Gemini 2.5 Flash（`AI.GENERATE`）處理留言情緒與貼文主題分類（incremental、只跑新資料），主題標籤對齊報社官網版面分類，產出 `fct_comments_sentiment` / `fct_post_topics` 資料市集供 dashboard 與分析師直接查；另以 `ai_cache` 把按需推論成本壓在固定低值。[我怎麼讓帳單不隨使用者膨脹 →](https://myps6415.github.io/zh/blog/llm-in-the-warehouse)
 - **語意分群 + RAG 檢索地基** — 以 Vertex 嵌入模型（`ML.GENERATE_EMBEDDING`，768 維 multilingual）+ KMEANS 把負評分群、由 LLM 命名主題（「讀者在罵什麼」）；建立留言 RAG 檢索層，並以**每週 LLM-as-judge eval 自動守門**（雙層門檻、跌破即 job 失敗），防止程式回歸與模型/資料漂移
