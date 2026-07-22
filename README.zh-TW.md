@@ -111,6 +111,7 @@
 
 **Side Project**
 - **[realping.tw](https://realping.tw)** — 我獨力打造的台灣實坪房產交易資料庫：用 dbt-duckdb 清理政府開放資料，再用同一套查詢核心同時以 REST API（FastAPI）與 MCP（FastMCP）對外服務，含 API 金鑰與用量額度、自助申請、OAuth 會員後台、Cloudflare 邊緣防護；另有一個房價估價模型（LightGBM，誤差中位數約 12%）做好待需求啟用。已上線 [api](https://api.realping.tw)／[mcp](https://mcp.realping.tw).realping.tw
+- **[ㄅㄆㄇ 注音幼兒樂園（bopomofokids.com）](https://bopomofokids.com)** — 我太太起頭、我接手做完整的免費注音學習網站：純前端 React SPA、沒有後端、沒有帳號、沒有 API 金鑰，注音讀音全部是教育部真人錄音；7 種遊戲模式涵蓋認讀、拼音、聲調、筆順。開發過程抓到兩個只有換個角度看才現形的渲染 bug——一個 Safari 專屬、一個只有真的印出來才會冒出來。[事後筆記 →](https://myps6415.github.io/zh/blog/bopomofokids-rendering-bugs)
 
 ## 🌱 開源貢獻
 - **[openclaw/openclaw#87291](https://github.com/openclaw/openclaw/issues/87291)** *(2026 年 5 月提報)* — 提交 OpenClaw 回覆上下文 sanitizer 的 500 字元靜默截斷根因：一個上限同時套用於短的 metadata 欄位與多段落的機器人回覆內文，導致閒置 session 重置後尾段內容被切除，Telegram 使用者遭遇「失憶」的機器人卻看不到任何錯誤訊息。提出將 body cap 從 field cap 拆分；maintainer 後續以更完整的變體落地相同的拆分方向 —— head+tail 截斷搭配 ReplyChain / inline ReplyToBody 路徑覆蓋，落地於 commit [`3753c5e2c8`](https://github.com/openclaw/openclaw/commit/3753c5e2c8)。[完整事後檢討 →](https://myps6415.github.io/zh/blog/openclaw-issue87291-postmortem)
