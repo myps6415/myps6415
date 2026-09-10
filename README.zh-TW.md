@@ -2,7 +2,7 @@
 
 # 👋 嗨，我是 John Tung (@myps6415)
 
-### Principal Data Engineer · GCP 現代資料堆疊 · 開源貢獻者
+### Data Lead · Principal Data Engineer · GCP 上的 Data／AI 平台 · 開源貢獻者
 
 ⭐ **[在 GitHub 追蹤我 →](https://github.com/myps6415)**
 
@@ -15,15 +15,15 @@
 ---
 
 ## 🚀 關於我
-- 🌏 在台灣，於媒體集團擔任 Principal Data Engineer
-- 🛠️ 從零打造社群分析資料平台 — 涵蓋資料擷取、建模、儀表板、部署、文件
+- 🌏 在台北，於媒體集團擔任 Data Lead／Principal Data Engineer——負責整條資料線：平台、平台上的 AI、還有人
+- 🛠️ 從零打造集團 Data／AI 平台 — 跨平台資料擷取、dbt 建模、三個主管與編輯每天用的上線產品、有品質把關的生成式 AI、部署、文件
 - 🧰 在 **GCP、AWS、Azure** 都有正式環境經驗；排程編排用過 **Airflow**；資料處理用過 **PySpark** — 目前偏向 GCP 是出於適配考量，而非習慣
-- 👥 過去曾擔任 **資料團隊 Team Lead 2.5 年**（Scrum、人員培育、招募、廠商協作），之後選擇從管理回到 Principal IC（個人貢獻者）角色——帶團隊期間也始終親自實作
+- 👥 帶過 **4 人 Data Team 2.5 年**（Scrum、人員培育、招募、廠商協作），帶團隊期間也始終親自實作——現在也是同一種做法
 - 🔬 出身於中文文本探勘、NLP 與情感分析，與目前的 LLM 強化資料流工作直接接軌
 - 🎯 偏好 **精簡、可觀測、成本可控** 的資料堆疊（BigQuery + Cloud Run Jobs + dbt），而非重型編排工具
 - 🔍 一半時間花在資料建模，另一半花在那些不起眼但關鍵的基礎設施：讓 token 持續有效、任務具備冪等性、帳單維持精實
 - 🏠 用跟正職一樣的紀律經營 homelab——一台 MacBook server 跑多個 Docker stack（照片備份、監控、家庭 LINE AI 助手、自架 agent runtime），每個都有自己的巡檢 loop 看著
-- 📚 目前深耕 LLM 強化資料流（情感／主題分類）以及面向編輯工作流程的向量檢索
+- 📚 目前深耕的是讓 AI 可靠到能進編輯台——只依據數據生成、品質一掉就讓任務失敗的評測、在明確規則裡工作的 agent——以及人與 AI agent 如何共用同一套 repo 規則
 
 ## 🛠️ 技術與工具
 
@@ -51,7 +51,6 @@
 
 **資料分析與視覺化**
 ![Streamlit](https://img.shields.io/badge/-Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
-![Looker Studio](https://img.shields.io/badge/-Looker%20Studio-4285F4?style=flat-square&logo=looker&logoColor=white)
 ![Superset](https://img.shields.io/badge/-Apache%20Superset-20A6C9?style=flat-square&logo=apachesuperset&logoColor=white)
 ![Plotly](https://img.shields.io/badge/-Plotly-3F4F75?style=flat-square&logo=plotly&logoColor=white)
 ![pandas](https://img.shields.io/badge/-pandas-150458?style=flat-square&logo=pandas&logoColor=white)
@@ -80,7 +79,7 @@
 - **建模**：dbt-bigquery — raw 層 append-only ingestion，再用 dbt 建 staging（view）/ marts（table），`QUALIFY ROW_NUMBER()` 去重
 - **API 串接**：Meta Graph API (Facebook / Instagram)、Threads API (OAuth 2.0)、YouTube Data API v3
 - **機敏資料與授權**：GCP Secret Manager、OAuth 2.0 長效 token 自動續期
-- **LLM 強化資料流**：Gemini（BigQuery `AI.GENERATE`）分類 + 接地生成（已上線）、Vertex 嵌入 + KMEANS 分群 + 留言 RAG 檢索搭配 LLM-as-judge eval 守門（已上線）、面向編輯台歷史檔的 BigQuery Vector Search（進行中）
+- **LLM 強化資料流**：Gemini（BigQuery `AI.GENERATE`）分類 + 接地生成（已上線）、Vertex 嵌入 + KMEANS 分群 + 留言 RAG 檢索搭配 LLM-as-judge eval 守門（已上線）、編輯台 4 工具 agent：強制自檢、成本硬上限、每週回放評測（已上線）
 - **過去正式環境經驗**：高 QPS 的 GKE Fluentd 遙測、Apache Iceberg + Spark 資料湖、跨雲 (AWS ↔ GCP) ETL 搭配 Ansible 部署、傳統 ML (XGBoost / RandomForest / SVM) 用於使用者分群預測
 - **其他**：Poetry、pytest、ruff（CI lint + format）、GitHub Actions、SendGrid / SMTP 郵件報表框架
 
@@ -89,25 +88,27 @@
 ## 💼 近期工作
 
 **已上線**
-- **多平台社群資料擷取** — **Facebook、Instagram、Threads、YouTube** 端到端寫入 BigQuery 的資料流（15+ 個 Cloud Run Jobs 由錯峰的 Cloud Scheduler 觸發、append-only 搭配讀取時去重以保留完整歷史），並擴充 GA4 官網/App 流量。撐起編輯與行銷團隊每天早上打開的儀表板。這條 pipeline 的一則資料品質事後檢討：[缺值該存 NULL、不該存 0 →](https://myps6415.github.io/zh/blog/null-not-zero)
-- **兩座正式營運儀表板** — 以 **Streamlit on Cloud Run** 打造兩座儀表板（一座看集團數位營收、一座看社群媒體成效），Google 登入。搭配**自助式權限管理**（三層權限 + 操作稽核）讓主管自行增減成員、不需重新部署；並埋點做產品與功能採用分析。儀表板上的 AI 觀點共用持久快取，成本不隨使用者數膨脹
+- **多平台社群資料擷取** — **Facebook、Instagram、Threads、YouTube** 端到端寫入 BigQuery 的資料流（34 個 Cloud Run Jobs 由錯峰的 Cloud Scheduler 觸發、append-only 搭配讀取時去重以保留完整歷史），並擴充 GA4 官網/App 流量。撐起編輯與行銷團隊每天早上打開的儀表板。這條 pipeline 的一則資料品質事後檢討：[缺值該存 NULL、不該存 0 →](https://myps6415.github.io/zh/blog/null-not-zero)
+- **三個給非工程師的上線產品** — 以 **Streamlit on Cloud Run** 打造兩座儀表板（給 C-level 的集團數位營收、給行銷主管與編輯的社群成效）加上下方的月營收一覽表 PDF 產製工具，同一套 Google 登入。搭配**自助式權限管理**（三層權限 + 操作稽核）讓主管自行增減成員、不需重新部署；並埋點做產品與功能採用分析。儀表板上的 AI 觀點共用持久快取，成本不隨使用者數膨脹
 - **Threads OAuth 2.0 全流程** — 雙帳號 8-scope 授權，搭配每週執行的 Cloud Run Job 透過 Secret Manager 自動續期 60 天有效期 token。將原本「主動通知 + 人工重新授權」的設計升級為完全免人工介入的自動化流程
 - **非工程師也能自助操作的 OAuth 介面** — 部署於 Cloudflare Pages 的純前端授權輔助工具，讓社群團隊編輯不需工程師協助即可完成 API 授權
 - **接手資料流重寫** — 接手既有的 Composer + Apps Script 營收資料流，改以 BigQuery External Tables + Scheduled Queries 重寫，**月成本從約 USD$300 壓到不到 $1**，功能完整保留
 - **編排工具選型** — 基於成本考量明確避開 managed Airflow (Composer)，以目前規模選用 Cloud Scheduler + Cloud Run Jobs，並備妥工作負載成長後遷移至專用 orchestrator 的路徑文件
-- **靜默失敗偵測** — dbt source freshness（25h warn／49h error）結合 Cloud Monitoring（regex 比對任務失敗）警示，避免上游 API 異常或任務崩潰多日無人發現
+- **靜默失敗偵測** — dbt source freshness（12h warn／20h error）、雙帳號平台的帳號級新鮮度測試、Cloud Monitoring 任務失敗警示——起因是發現「job 成功、寫入 0 列」這種失敗，其他監控全都看不到
 - **個人自動化自架遷移** *(2026 年 6 月)* — 把 Zeabur 上的 n8n workflow（每日家庭行程提醒推 LINE）改寫成 178 行純 stdlib Python 腳本，搭配本地 OpenClaw cron 排程，**月費從 USD$7.88 降到 $0**；本地 OpenClaw 用了一段時間後，這個託管 workflow 變得多餘。重寫的副作用是修掉一個全日事件會炸的潛在 bug。[完整遷移筆記 →](https://myps6415.github.io/zh/blog/from-n8n-zeabur-to-openclaw-local)
 - **LINE 家庭 AI 助手＋六道巡檢 loop** *(2026 年 7 月)* — 自架在家用 server 的 LINE 群組 bot（FastAPI webhook 走 Cloudflare Tunnel 出去）：**14 個 function calling 工具**——天氣、報價、匯率、會真 @ 人的循環提醒、用「盤中時段＋報價新鮮度」雙閘門把關的到價警報（免維護假日表）、聊天回顧、看圖、長期記憶——結果以 LINE Flex 卡片＋一鍵追問呈現，全走免費 reply API 加買斷制 LLM，**每則訊息邊際成本 $0**。外面包了**六道住在 Docker 外面的獨立巡檢 loop**（存活哨兵、每日健康摘要、揪出「說好會提醒卻沒送」的交付稽核、每週驗證過完整性的備份、每天跑確定性斷言的回歸探針）——因為 webhook bot 最糟的失敗模式就是沉默。[系列筆記 →](https://myps6415.github.io/zh/blog/line-bot-family-assistant)
 - **這個站 → MDX content collection** *(2026 年 6 月)* — 把 blog 從每頁一個 Astro 檔遷成雙語 MDX content collection，並加上自架的 Sveltia CMS（Cloudflare Worker OAuth，$0）可在瀏覽器編輯。途中抓到兩個無聲 bug——一個保留欄位名會讓文章非決定性地消失、一個 CommonMark 規則不肯讓中文變粗體。[完整筆記 →](https://myps6415.github.io/zh/blog/migrating-to-mdx)
 - **LLM 強化資料流** — 以 BigQuery 內建 Gemini 2.5 Flash（`AI.GENERATE`）處理留言情緒與貼文主題分類（incremental、只跑新資料），主題標籤對齊報社官網版面分類，產出 `fct_comments_sentiment` / `fct_post_topics` 資料市集供 dashboard 與分析師直接查；另以 `ai_cache` 把按需推論成本壓在固定低值。[我怎麼讓帳單不隨使用者膨脹 →](https://myps6415.github.io/zh/blog/llm-in-the-warehouse)
-- **語意分群 + RAG 檢索地基** — 以 Vertex 嵌入模型（`ML.GENERATE_EMBEDDING`，768 維 multilingual）+ KMEANS 把負評分群、由 LLM 命名主題（「讀者在罵什麼」）；建立留言 RAG 檢索層，並以**每週 LLM-as-judge eval 自動守門**（雙層門檻、跌破即 job 失敗），防止程式回歸與模型/資料漂移
+- **語意分群 + RAG 檢索地基** — 以 Vertex 嵌入模型（`ML.GENERATE_EMBEDDING`，768 維 multilingual）+ KMEANS 把負評分群、由 LLM 命名主題（「讀者在罵什麼」）；建立留言 RAG 檢索層，並以**每週 LLM-as-judge eval 自動守門**（雙層門檻、跌破即 job 失敗），防止程式回歸與模型/資料漂移。至今第三次告警是真陽性——同文洗版佔掉 top-k——修在檢索層，不是放寬門檻
+- **有守門的編輯台 agent** — 4 工具的編輯助理（選題建議、爆款案例、競品雷達、依來源打草稿）：不寫 SQL、每份草稿後強制跑忠實性自檢、每次與每人都有成本硬上限，並由每週回放評測打分（工具選對率、忠實度、範圍外問題的婉拒率）
+- **治理與交付方式** — 資料治理盤點（缺口有人認領）、全部 job 與 service 的成本歸屬 label、決策紀錄、新人 onboarding 階梯、跨專案的團隊知識庫，以及機器可讀的 repo 契約（禁區、驗收指令、守門），讓人與 AI agent 照同一套規則做事
 - **競品對標 + 統計跨事業單位分析** — 以官方公開 API 抓競品數據（YouTube + Instagram）做題材聲量（share of voice）比較；接入台股加權指數、景氣燈號等外部因子，搭配 Mann-Kendall 趨勢檢定、Sen's slope、季節分解與 lead-lag 相關，分辨順風成長與逆勢成長的本事
 - **報紙版面 PDF 產製工具** — Streamlit + ReportLab 解析股市行情資料檔，自動排版成可直接印的月營收一覽表報紙版面 PDF，取代人工排版
 - **GA4 網站分析 ingestion** — 集團官網與 App 流量透過 GA4 Data API 接入（4 個 Cloud Run Jobs + 文章排行 `fct_ga_story`）；非工程師要開的「檢視者」授權走 Cloudflare Pages 自助頁
 
 **進行中**
-- 🔎 **編輯台語意搜尋** — 嵌入與檢索地基已上線（負評分群 + 留言 RAG 檢索），正延伸到歷史文章檔；評估 BigQuery Vector Search 與 self-host Elasticsearch（ES → BQ embeddings），讓編輯對歷史文章做語意搜尋
-- 🧹 **遷移收尾** — 新架構已出數，正把最後一條營收 pipeline 從舊的 Composer DAG / Apps Script 完全下線
+- 🧾 **需求即資料** — 一個 PoC：把需求訪談變成可追溯的型別化記錄庫（每條需求都指得回使用者原話），由五組不同模型的檢查員稽核，並與原做法跑 A/B 對照
+- 🧹 **資料治理收尾** — 把治理盤點抓到的缺口一項項收掉：成本歸屬、最小權限、對 IT 的存取需求，每個決定都寫成團隊與 agent 都能照做的紀錄
 
 **Side Project**
 - **[realping.tw](https://realping.tw)** — 我獨力打造的台灣實坪房產交易資料庫：用 dbt-duckdb 清理政府開放資料，再用同一套查詢核心同時以 REST API（FastAPI）與 MCP（FastMCP）對外服務，含 API 金鑰與用量額度、自助申請、OAuth 會員後台、Cloudflare 邊緣防護；另有一個房價估價模型（LightGBM，誤差中位數約 12%）做好待需求啟用。已上線 [api](https://api.realping.tw)／[mcp](https://mcp.realping.tw).realping.tw
