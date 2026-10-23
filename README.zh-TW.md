@@ -15,15 +15,14 @@
 ---
 
 ## 🚀 關於我
-- 🌏 在台北，於媒體集團擔任 Data Lead／Principal Data Engineer——負責整條資料線：平台、平台上的 AI、還有人
-- 🛠️ 從零打造集團 Data／AI 平台 — 跨平台資料擷取、dbt 建模、三個主管與編輯每天用的上線產品、有品質把關的生成式 AI、部署、文件
-- 🧰 在 **GCP、AWS、Azure** 都有正式環境經驗；排程編排用過 **Airflow**；資料處理用過 **PySpark** — 目前偏向 GCP 是出於適配考量，而非習慣
-- 👥 帶過 **4 人 Data Team 2.5 年**（Scrum、人員培育、招募、廠商協作），帶團隊期間也始終親自實作——現在也是同一種做法
-- 🔬 出身於中文文本探勘、NLP 與情感分析，與目前的 LLM 強化資料流工作直接接軌
-- 🎯 偏好 **精簡、可觀測、成本可控** 的資料堆疊（BigQuery + Cloud Run Jobs + dbt），而非重型編排工具
-- 🔍 一半時間花在資料建模，另一半花在那些不起眼但關鍵的基礎設施：讓 token 持續有效、任務具備冪等性、帳單維持精實
-- 🏠 用跟正職一樣的紀律經營 homelab——一台 MacBook server 跑多個 Docker stack（照片備份、監控、家庭 LINE AI 助手、自架 agent runtime），每個都有自己的巡檢 loop 看著
-- 📚 目前深耕的是讓 AI 可靠到能進編輯台——只依據數據生成、品質一掉就讓任務失敗的評測、在明確規則裡工作的 agent——以及人與 AI agent 如何共用同一套 repo 規則
+- 🌏 住桃園，在媒體集團擔任 Data Lead／Principal Data Engineer，負責資料平台、平台上的 AI，以及團隊
+- 🛠️ 從零建立集團的 Data／AI 平台：跨平台資料擷取、dbt 建模、主管與編輯每天在用的三個上線產品，以及有品質門檻的生成式 AI
+- 🧰 在 **GCP、AWS、Azure** 都有正式環境經驗，用過 **Airflow** 和 **PySpark**。工具依需求選，目前以 GCP 為主
+- 👥 帶過 **4 人 Data Team 兩年半**（Scrum、培育、招募、廠商協作），帶團隊時也一直自己寫 code，現在也是
+- 🔬 出身中文文字探勘、NLP 與情感分析，跟現在做的 LLM 工作是同一條線
+- 🎯 偏好精簡、看得到狀態、成本低的架構（BigQuery、Cloud Run Jobs、dbt），不用重型編排工具；token 續期、job 冪等、帳單壓低這些瑣事花的時間不比建模少
+- 🏠 在一台 MacBook server 上跑 homelab：照片備份、監控、家庭 LINE 助手、自架 agent runtime 各是一組 Docker stack，各有自己的巡檢 job
+- 📚 目前專注在讓 AI 可靠到能進編輯台：只依據數據生成、品質低於門檻就讓任務失敗的評測、在明確規則內工作的 agent，以及讓人和 AI agent 共用同一套 repo 規則
 
 ## 🛠️ 技術與工具
 
@@ -87,32 +86,22 @@
 
 ## 💼 近期工作
 
-**已上線**
-- **多平台社群資料擷取** — **Facebook、Instagram、Threads、YouTube** 端到端寫入 BigQuery 的資料流（34 個 Cloud Run Jobs 由錯峰的 Cloud Scheduler 觸發、append-only 搭配讀取時去重以保留完整歷史），並擴充 GA4 官網/App 流量。撐起編輯與行銷團隊每天早上打開的儀表板。這條 pipeline 的一則資料品質事後檢討：[缺值該存 NULL、不該存 0 →](https://myps6415.github.io/zh/blog/null-not-zero)
-- **三個給非工程師的上線產品** — 以 **Streamlit on Cloud Run** 打造兩座儀表板（給 C-level 的集團數位營收、給行銷主管與編輯的社群成效）加上下方的月營收一覽表 PDF 產製工具，同一套 Google 登入。搭配**自助式權限管理**（三層權限 + 操作稽核）讓主管自行增減成員、不需重新部署；並埋點做產品與功能採用分析。儀表板上的 AI 觀點共用持久快取，成本不隨使用者數膨脹
-- **Threads OAuth 2.0 全流程** — 雙帳號 8-scope 授權，搭配每週執行的 Cloud Run Job 透過 Secret Manager 自動續期 60 天有效期 token。將原本「主動通知 + 人工重新授權」的設計升級為完全免人工介入的自動化流程
-- **非工程師也能自助操作的 OAuth 介面** — 部署於 Cloudflare Pages 的純前端授權輔助工具，讓社群團隊編輯不需工程師協助即可完成 API 授權
-- **接手資料流重寫** — 接手既有的 Composer + Apps Script 營收資料流，改以 BigQuery External Tables + Scheduled Queries 重寫，**月成本從約 USD$300 壓到不到 $1**，功能完整保留
-- **編排工具選型** — 基於成本考量明確避開 managed Airflow (Composer)，以目前規模選用 Cloud Scheduler + Cloud Run Jobs，並備妥工作負載成長後遷移至專用 orchestrator 的路徑文件
-- **靜默失敗偵測** — dbt source freshness（12h warn／20h error）、雙帳號平台的帳號級新鮮度測試、Cloud Monitoring 任務失敗警示——起因是發現「job 成功、寫入 0 列」這種失敗，其他監控全都看不到
-- **個人自動化自架遷移** *(2026 年 6 月)* — 把 Zeabur 上的 n8n workflow（每日家庭行程提醒推 LINE）改寫成 178 行純 stdlib Python 腳本，搭配本地 OpenClaw cron 排程，**月費從 USD$7.88 降到 $0**；本地 OpenClaw 用了一段時間後，這個託管 workflow 變得多餘。重寫的副作用是修掉一個全日事件會炸的潛在 bug。[完整遷移筆記 →](https://myps6415.github.io/zh/blog/from-n8n-zeabur-to-openclaw-local)
-- **LINE 家庭 AI 助手＋六道巡檢 loop** *(2026 年 7 月)* — 自架在家用 server 的 LINE 群組 bot（FastAPI webhook 走 Cloudflare Tunnel 出去）：**14 個 function calling 工具**——天氣、報價、匯率、會真 @ 人的循環提醒、用「盤中時段＋報價新鮮度」雙閘門把關的到價警報（免維護假日表）、聊天回顧、看圖、長期記憶——結果以 LINE Flex 卡片＋一鍵追問呈現，全走免費 reply API 加買斷制 LLM，**每則訊息邊際成本 $0**。外面包了**六道住在 Docker 外面的獨立巡檢 loop**（存活哨兵、每日健康摘要、揪出「說好會提醒卻沒送」的交付稽核、每週驗證過完整性的備份、每天跑確定性斷言的回歸探針）——因為 webhook bot 最糟的失敗模式就是沉默。[系列筆記 →](https://myps6415.github.io/zh/blog/line-bot-family-assistant)
-- **這個站 → MDX content collection** *(2026 年 6 月)* — 把 blog 從每頁一個 Astro 檔遷成雙語 MDX content collection，並加上自架的 Sveltia CMS（Cloudflare Worker OAuth，$0）可在瀏覽器編輯。途中抓到兩個無聲 bug——一個保留欄位名會讓文章非決定性地消失、一個 CommonMark 規則不肯讓中文變粗體。[完整筆記 →](https://myps6415.github.io/zh/blog/migrating-to-mdx)
-- **LLM 強化資料流** — 以 BigQuery 內建 Gemini 2.5 Flash（`AI.GENERATE`）處理留言情緒與貼文主題分類（incremental、只跑新資料），主題標籤對齊報社官網版面分類，產出 `fct_comments_sentiment` / `fct_post_topics` 資料市集供 dashboard 與分析師直接查；另以 `ai_cache` 把按需推論成本壓在固定低值。[我怎麼讓帳單不隨使用者膨脹 →](https://myps6415.github.io/zh/blog/llm-in-the-warehouse)
-- **語意分群 + RAG 檢索地基** — 以 Vertex 嵌入模型（`ML.GENERATE_EMBEDDING`，768 維 multilingual）+ KMEANS 把負評分群、由 LLM 命名主題（「讀者在罵什麼」）；建立留言 RAG 檢索層，並以**每週 LLM-as-judge eval 自動守門**（雙層門檻、跌破即 job 失敗），防止程式回歸與模型/資料漂移。至今第三次告警是真陽性——同文洗版佔掉 top-k——修在檢索層，不是放寬門檻
-- **有守門的編輯台 agent** — 4 工具的編輯助理（選題建議、爆款案例、競品雷達、依來源打草稿）：不寫 SQL、每份草稿後強制跑忠實性自檢、每次與每人都有成本硬上限，並由每週回放評測打分（工具選對率、忠實度、範圍外問題的婉拒率）
-- **治理與交付方式** — 資料治理盤點（缺口有人認領）、全部 job 與 service 的成本歸屬 label、決策紀錄、新人 onboarding 階梯、跨專案的團隊知識庫，以及機器可讀的 repo 契約（禁區、驗收指令、守門），讓人與 AI agent 照同一套規則做事
-- **競品對標 + 統計跨事業單位分析** — 以官方公開 API 抓競品數據（YouTube + Instagram）做題材聲量（share of voice）比較；接入台股加權指數、景氣燈號等外部因子，搭配 Mann-Kendall 趨勢檢定、Sen's slope、季節分解與 lead-lag 相關，分辨順風成長與逆勢成長的本事
-- **報紙版面 PDF 產製工具** — Streamlit + ReportLab 解析股市行情資料檔，自動排版成可直接印的月營收一覽表報紙版面 PDF，取代人工排版
-- **GA4 網站分析 ingestion** — 集團官網與 App 流量透過 GA4 Data API 接入（4 個 Cloud Run Jobs + 文章排行 `fct_ga_story`）；非工程師要開的「檢視者」授權走 Cloudflare Pages 自助頁
+**工作上已上線**
+- **多平台資料擷取**：Facebook、Instagram、Threads、YouTube、GA4 經 34 個錯峰排程的 Cloud Run Jobs 寫入 BigQuery，append-only、讀取時去重。dbt source freshness、帳號級檢查與 Cloud Monitoring 會抓出「job 成功卻沒寫入資料」的情況。事後檢討：[缺值該存 NULL，不該存 0 →](https://myps6415.github.io/zh/blog/null-not-zero)
+- **給非工程師的三個上線產品**：給主管的集團營收儀表板、給行銷與編輯的社群成效儀表板，以及把月營收表排成報紙版面 PDF 的產製工具（Streamlit + ReportLab）。都跑在 Cloud Run，共用一套 Google 登入；主管可透過三層權限自行增刪成員，操作都留紀錄
+- **接手 pipeline 重寫**：把 Composer + Apps Script 的營收 pipeline 改成 BigQuery External Tables + Scheduled Queries，**月成本從約 USD 300 降到不到 USD 1**。以目前規模，Cloud Scheduler + Cloud Run Jobs 就能取代 managed orchestrator，規模變大時的遷移路徑已寫成文件
+- **Threads OAuth**：兩個帳號、八種權限，每週一支 Cloud Run Job 透過 Secret Manager 自動續期 60 天 token，不需要人工重新授權。編輯透過 Cloudflare Pages 上的靜態自助頁完成授權
+- **在資料倉儲裡跑 LLM 分類**：以 BigQuery `AI.GENERATE` 呼叫 Gemini 2.5 Flash，增量分類留言情緒與貼文主題，主題標籤對齊報社官網版面；共用快取讓按需推論的成本維持固定。[帳單怎麼沒跟著使用者變多 →](https://myps6415.github.io/zh/blog/llm-in-the-warehouse)
+- **留言分群與 RAG**：用 Vertex 嵌入與 KMEANS 把負評分群並命名主題。留言 RAG 每週跑 LLM-as-judge 評測，品質低於門檻就讓 job 失敗；目前第三次告警是真的問題（重複留言佔滿 top-k），修在檢索層，沒有調低門檻
+- **編輯台 agent**：四個工具（選題建議、爆款案例、競品雷達、依來源打草稿），不寫自由 SQL，每份草稿後跑忠實性檢查，每次與每人都有成本上限，每週回放評測工具選對率、忠實度與拒答
+- **競品與跨事業單位分析**：用官方 YouTube、Instagram API 抓競品資料做題材聲量比較，接上台股加權指數與景氣燈號，用 Mann-Kendall、Sen's slope、季節分解與 lead-lag 相關分辨大環境順風和真正的成長
+- **治理**：資料治理盤點（每個缺口都有負責人）、所有 job 與 service 的成本 label、決策紀錄、新人 onboarding 階梯、團隊知識庫，以及人和 AI agent 都照著做的機器可讀 repo 契約（禁區、驗收指令、守門）
+- **需求管線 PoC** *（2026 年 9 月，暫停）*：多 agent 的需求工程管線。使用者每句輸入由 hook 逐字寫入有雜湊鏈的證據帳，需求存成以 ID 互聯的型別化記錄，每輪由六組不同模型的檢查員稽核，機械性檢查交給確定性的 validator。在跑之前就定好判準的 A/B 對照中，訪談覆蓋率與原做法打平（皆 25.9%）；原做法的 AI 稽核有 53% 的發現花在 validator 幾秒內、零 token 就能擋下的機械項。迴歸測試 147 項
 
-**進行中**
-- 🧾 **需求即資料** — 一個 PoC：把需求訪談變成可追溯的型別化記錄庫（每條需求都指得回使用者原話），由五組不同模型的檢查員稽核，並與原做法跑 A/B 對照
-- 🧹 **資料治理收尾** — 把治理盤點抓到的缺口一項項收掉：成本歸屬、最小權限、對 IT 的存取需求，每個決定都寫成團隊與 agent 都能照做的紀錄
-
-**Side Project**
-- **[realping.tw](https://realping.tw)** — 我獨力打造的台灣實坪房產交易資料庫：用 dbt-duckdb 清理政府開放資料，再用同一套查詢核心同時以 REST API（FastAPI）與 MCP（FastMCP）對外服務，含 API 金鑰與用量額度、自助申請、OAuth 會員後台、Cloudflare 邊緣防護；另有一個房價估價模型（LightGBM，誤差中位數約 12%）做好待需求啟用。已上線 [api](https://api.realping.tw)／[mcp](https://mcp.realping.tw).realping.tw
-- **[ㄅㄆㄇ 注音幼兒樂園（bopomofokids.com）](https://bopomofokids.com)** — 我太太起頭、我接手做完整的免費注音學習網站：純前端 React SPA、沒有後端、沒有帳號、沒有 API 金鑰，注音讀音全部是教育部真人錄音；7 種遊戲模式涵蓋認讀、拼音、聲調、筆順。開發過程抓到兩個只有換個角度看才現形的渲染 bug——一個 Safari 專屬、一個只有真的印出來才會冒出來。[事後筆記 →](https://myps6415.github.io/zh/blog/bopomofokids-rendering-bugs)
+**個人專案**
+- **[realping.tw](https://realping.tw)**：我獨立開發、營運的台灣實坪房產交易資料。用 dbt-duckdb 清理政府開放資料，同一個查詢核心同時提供 REST API（FastAPI）與 MCP server（FastMCP，**已列於官方 MCP Registry**），有 API 金鑰、用量額度、自助申請，前面接 Cloudflare。另有一個 LightGBM 估價模型（誤差中位數約 12%），等需求出現再上線。網址 [api](https://api.realping.tw)／[mcp](https://mcp.realping.tw).realping.tw
+- **[ㄅㄆㄇ 注音幼兒樂園（bopomofokids.com）](https://bopomofokids.com)**：我太太起頭、我接手做完的免費注音學習網站。純前端 React SPA，七種遊戲模式，沒有後端、沒有帳號，讀音用教育部真人錄音。[兩個渲染 bug，一個只在 Safari、一個只在列印時出現 →](https://myps6415.github.io/zh/blog/bopomofokids-rendering-bugs)
+- **LINE 家庭助手** *（2026 年 7 月）*：自架在家用 server 的 LINE 群組 bot（FastAPI，經 Cloudflare Tunnel 對外），有 14 個 function calling 工具，包括天氣、報價、會 @ 人的循環提醒、依盤中時段把關的到價警報，每則訊息的邊際成本是 0。另有六個跑在 Docker 外的巡檢 job（存活、每日健康摘要、提醒送達稽核、驗證過的備份、回歸探針），因為 webhook bot 出問題時通常不會有任何錯誤訊息。[系列文章 →](https://myps6415.github.io/zh/blog/line-bot-family-assistant)
 
 ## 🌱 開源貢獻
 - **[apache/airflow#67592](https://github.com/apache/airflow/pull/67592)** *(2026 年 10 月合併)* — 我的第一個 Apache Airflow PR。升到 Airflow 3 之後，`task.queued_duration` 不再送出：worker 改由 Execution API 啟動 task，而送這個 metric 的程式碼只留在舊路徑上。我在 `ti_run` 把它補回來（+38 / −1，另加 360 行測試；關閉 [#63503](https://github.com/apache/airflow/issues/63503) 與 [#66067](https://github.com/apache/airflow/issues/66067)）。四個半月的 review 大多在討論「什麼時候該記一筆」，我第一版的兩個 guard 最後都拿掉了，定案是每排一次隊記一筆，並在所有可能回 5xx 的步驟之後才送，避免重試時重複計算。由 PMC 成員合併，排入 3.4.0。[完整說明 →](https://myps6415.github.io/zh/blog/airflow-pr67592-queued-duration)
