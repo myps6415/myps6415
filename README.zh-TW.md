@@ -78,7 +78,7 @@
 - **建模**：dbt-bigquery — raw 層 append-only ingestion，再用 dbt 建 staging（view）/ marts（table），`QUALIFY ROW_NUMBER()` 去重
 - **API 串接**：Meta Graph API (Facebook / Instagram)、Threads API (OAuth 2.0)、YouTube Data API v3
 - **機敏資料與授權**：GCP Secret Manager、OAuth 2.0 長效 token 自動續期
-- **LLM 強化資料流**：Gemini（BigQuery `AI.GENERATE`）分類 + 接地生成（已上線）、Vertex 嵌入 + KMEANS 分群 + 留言 RAG 檢索搭配 LLM-as-judge eval 守門（已上線）、編輯台 4 工具 agent：強制自檢、成本硬上限、每週回放評測（已上線）
+- **LLM 強化資料流**：Gemini（BigQuery `AI.GENERATE`）分類與只依數據的生成（已上線）、Vertex 嵌入 + KMEANS 分群 + 留言 RAG 檢索搭配 LLM-as-judge eval 守門（已上線）、編輯台 4 工具 agent：強制自檢、成本硬上限、每週回放評測（已上線）
 - **過去正式環境經驗**：高 QPS 的 GKE Fluentd 遙測、Apache Iceberg + Spark 資料湖、跨雲 (AWS ↔ GCP) ETL 搭配 Ansible 部署、傳統 ML (XGBoost / RandomForest / SVM) 用於使用者分群預測
 - **其他**：Poetry、pytest、ruff（CI lint + format）、GitHub Actions、SendGrid / SMTP 郵件報表框架
 
@@ -95,7 +95,7 @@
 - **留言分群與 RAG**：用 Vertex 嵌入與 KMEANS 把負評分群並命名主題。留言 RAG 每週跑 LLM-as-judge 評測，品質低於門檻就讓 job 失敗；目前第三次告警是真的問題（重複留言佔滿 top-k），修在檢索層，沒有調低門檻
 - **編輯台 agent**：四個工具（選題建議、爆款案例、競品雷達、依來源打草稿），不寫自由 SQL，每份草稿後跑忠實性檢查，每次與每人都有成本上限，每週回放評測工具選對率、忠實度與拒答
 - **競品與跨事業單位分析**：用官方 YouTube、Instagram API 抓競品資料做題材聲量比較，接上台股加權指數與景氣燈號，用 Mann-Kendall、Sen's slope、季節分解與 lead-lag 相關分辨大環境順風和真正的成長
-- **治理**：資料治理盤點（每個缺口都有負責人）、所有 job 與 service 的成本 label、決策紀錄、新人 onboarding 階梯、團隊知識庫，以及人和 AI agent 都照著做的機器可讀 repo 契約（禁區、驗收指令、守門）
+- **治理**：資料治理盤點（列出六項缺口與待決策）、所有 job 與 service 的成本 label、決策紀錄、新人 onboarding 階梯、團隊知識庫，以及人和 AI agent 都照著做的機器可讀 repo 契約（禁區、驗收指令、守門）
 - **需求管線 PoC** *（2026 年 9 月，暫停）*：多 agent 的需求工程管線。使用者每句輸入由 hook 逐字寫入有雜湊鏈的證據帳，需求存成以 ID 互聯的型別化記錄，每輪由六組不同模型的檢查員稽核，機械性檢查交給確定性的 validator。在跑之前就定好判準的 A/B 對照中，訪談覆蓋率與原做法打平（皆 25.9%）；原做法的 AI 稽核有 53% 的發現花在 validator 幾秒內、零 token 就能擋下的機械項。迴歸測試 147 項
 
 **個人專案**
