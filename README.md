@@ -2,7 +2,7 @@
 
 # 👋 Hi, I'm John Tung (@myps6415)
 
-### Data Lead · Principal Data Engineer · Data/AI platforms on GCP · OSS Contributor
+### Data Lead · Principal Data Engineer · Data/AI & cloud platforms on GCP · OSS Contributor
 
 ⭐ **[Follow me on GitHub →](https://github.com/myps6415)**
 
@@ -17,11 +17,12 @@
 ## 🚀 About Me
 - 🌏 Based in Taoyuan, Taiwan. Data Lead / Principal Data Engineer at a media group, responsible for the data platform, the AI built on it, and the team
 - 🛠️ Built the group's Data/AI platform from zero: cross-platform ingestion, dbt models, three production tools used daily by executives and editors, and generative AI with quality gates
+- ☁️ I build and run the infrastructure under it too: a re-runnable GCP environment setup, least-privilege IAM cut down from audit logs, CI/CD with keyless deploys and post-deploy checks, and monitoring that catches jobs that succeed but write nothing
 - 🧰 Production experience on **GCP, AWS and Azure**, with **Airflow** and **PySpark**. I pick the stack by fit; right now that is mostly GCP
 - 👥 Led a **four-person Data Team for two and a half years** (Scrum, mentoring, hiring, vendor work) while still writing code. I work the same way now
 - 🔬 Background in Chinese text mining, NLP and sentiment analysis, which carries straight into the current LLM work
 - 🎯 Prefer small, observable, low-cost stacks (BigQuery, Cloud Run Jobs, dbt) over heavy orchestrators, and spend as much time on the unglamorous parts: token refresh, idempotent jobs, small bills
-- 🏠 Run a homelab on a MacBook server: Docker stacks for photo backup, monitoring, a family LINE assistant and a self-hosted agent runtime, each with its own watchdog jobs
+- 🏠 Run a homelab on a MacBook server: Docker stacks for photo backup, Prometheus + Grafana monitoring, a family LINE assistant and a self-hosted agent runtime, each with its own watchdog jobs
 - 📚 Currently focused on making AI reliable enough for a newsroom: grounded generation, evals that fail the job when quality drops, agents that work within explicit rules, and repo rules shared by people and AI agents
 
 ## 🛠️ Technologies & Tools
@@ -59,6 +60,8 @@
 ![Cloud Build](https://img.shields.io/badge/-Cloud%20Build-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/-GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
 ![Ansible](https://img.shields.io/badge/-Ansible-EE0000?style=flat-square&logo=ansible&logoColor=white)
+![Prometheus](https://img.shields.io/badge/-Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white)
+![Grafana](https://img.shields.io/badge/-Grafana-F46800?style=flat-square&logo=grafana&logoColor=white)
 ![Poetry](https://img.shields.io/badge/-Poetry-60A5FA?style=flat-square&logo=poetry&logoColor=white)
 ![pytest](https://img.shields.io/badge/-pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white)
 ![Ruff](https://img.shields.io/badge/-Ruff-D7FF64?style=flat-square&logo=ruff&logoColor=black)
@@ -74,12 +77,13 @@
 <details>
 <summary><b>Working with</b> — patterns and tools I reach for</summary>
 
-- **Ingestion**: Cloud Run Jobs + Cloud Scheduler (chosen over Airflow / Composer for cost), Cloud Build CI/CD
+- **Ingestion**: Cloud Run Jobs + Cloud Scheduler (chosen over Airflow / Composer for cost)
+- **Infra & delivery**: re-runnable `gcloud` environment setup, least-privilege IAM (audit-log based, IAM conditions, resource-level bindings), Cloud Build push-to-deploy, GitHub Actions with Workload Identity Federation, container smoke tests and post-deploy version checks
 - **Modeling**: dbt-bigquery — append-only raw ingestion, then dbt staging (views) / marts (tables) with `QUALIFY ROW_NUMBER()` dedup
 - **APIs**: Meta Graph API (Facebook / Instagram), Threads API (OAuth 2.0), YouTube Data API v3
 - **Secrets & auth**: GCP Secret Manager, OAuth 2.0 long-lived token refresh automation
-- **LLM-augmented pipelines**: Gemini via BigQuery `AI.GENERATE` for classification + grounded generation (shipped), Vertex embeddings + KMEANS clustering + RAG retrieval with LLM-as-judge eval gating (shipped), a four-tool newsroom agent with mandatory self-check, hard cost caps and weekly replay eval (shipped)
-- **Past production**: GKE-hosted Fluentd telemetry at high QPS, Apache Iceberg + Spark data lake, multi-cloud (AWS ↔ GCP) ETL with Ansible-driven deployment, classical ML (XGBoost / RandomForest / SVM) for user-segment prediction
+- **LLM-augmented pipelines**: Gemini via BigQuery `AI.GENERATE` for classification + grounded generation (shipped), classification of what each negative comment targets, Vertex-embedding RAG retrieval with LLM-as-judge eval gating (shipped), a four-tool newsroom agent with mandatory self-check, hard cost caps and weekly replay eval (shipped)
+- **Past production**: fluenthub, a Fluentd collection service I built from zero on GKE (cluster, 6-replica Deployment with rolling updates, Ingress + static IP, gcsfuse-mounted schemas; load-tested by replaying 400k real articles through Spark, ~1,900 req/s peak with zero errors), Apache Iceberg + Spark data lake, multi-cloud (AWS ↔ GCP) ETL with Ansible-driven deployment, classical ML (XGBoost / RandomForest / SVM) for user-segment prediction
 - **Other**: Poetry, pytest, ruff (lint + format in CI), GitHub Actions, SendGrid / SMTP email-reporting framework
 
 </details>
@@ -87,19 +91,20 @@
 ## 💼 Recent Work
 
 **Shipped at work**
+- **Cloud infrastructure**: one re-runnable script builds the whole GCP environment from zero (service accounts, IAM, Secret Manager, Artifact Registry, schedules, alerts). Cloud Build deploys on push in 85s, down from 302s, and its build cache stopped about 46GB a month of image growth. When a shared project needed a security review, I narrowed our service account to what the audit logs showed it actually used (IAM conditions plus resource-level bindings, with plan / apply / rollback), testing each case with a throwaway account first
 - **Multi-platform ingestion**: Facebook, Instagram, Threads, YouTube and GA4 into BigQuery through 34 Cloud Run Jobs on staggered schedules, append-only with dedup on read. dbt source freshness, account-level checks and Cloud Monitoring catch jobs that succeed but write nothing. Postmortem: [when a missing value must be NULL, not 0 →](https://myps6415.github.io/blog/null-not-zero)
 - **Three production tools for non-engineers**: a group revenue dashboard for executives, a social performance dashboard for marketing and editors, and a tool that lays out monthly revenue tables as print-ready newspaper PDFs (Streamlit + ReportLab). All run on Cloud Run behind one Google login; managers add and remove users themselves through a three-tier permission system with an audit log
 - **Inherited pipeline rewrite**: replaced a Composer + Apps Script revenue pipeline with BigQuery External Tables and Scheduled Queries, **cutting monthly cost from about USD 300 to under USD 1**. At this scale Cloud Scheduler + Cloud Run Jobs does the job of a managed orchestrator; the migration path is written down for when that changes
 - **Threads OAuth**: two accounts, eight scopes, and a weekly Cloud Run Job that refreshes the 60-day tokens through Secret Manager, so nobody re-authorizes by hand. Editors grant access through a static self-serve page on Cloudflare Pages
-- **LLM classification in the warehouse**: Gemini 2.5 Flash through BigQuery `AI.GENERATE` classifies comment sentiment and post topics incrementally, using the newsroom's own section labels; a shared cache keeps on-demand inference cost flat. [How the bill stayed flat →](https://myps6415.github.io/blog/llm-in-the-warehouse)
-- **Comment clustering and RAG**: Vertex embeddings and KMEANS group negative comments into named themes. The comment RAG layer is checked weekly by an LLM-as-judge eval that fails the job when quality drops; the third alert so far was real (duplicate comments filling the top-k) and was fixed in retrieval, not by lowering the threshold
+- **LLM classification in the warehouse**: Gemini through BigQuery `AI.GENERATE` classifies comment sentiment and post topics incrementally, using the newsroom's own section labels; a shared cache keeps on-demand inference cost flat. [How the bill stayed flat →](https://myps6415.github.io/blog/llm-in-the-warehouse)
+- **Comment analysis and RAG**: every negative comment is classified by what it is aimed at (our reporting, the news event itself, or spam), which replaced an earlier KMEANS clustering that could only group by topic. The comment RAG layer (Vertex embeddings) is checked weekly by an LLM-as-judge eval that fails the job when quality drops; the third alert so far was real (duplicate comments filling the top-k) and was fixed in retrieval, not by lowering the threshold
 - **Newsroom agent**: four tools (topic suggestions, viral cases, competitor radar, source-based drafting), no free-form SQL, a faithfulness check after every draft, cost caps per run and per user, and a weekly replay eval for tool choice, faithfulness and refusals
 - **Competitor and cross-BU analysis**: competitor data from the official YouTube and Instagram APIs for topic share of voice, joined with the stock index and the business-cycle signal; Mann-Kendall, Sen's slope, seasonal decomposition and lead-lag correlation separate market tailwinds from real gains
 - **Governance**: a data-governance inventory that lists six open gaps and the decisions they need, cost labels on every job and service, decision records, staged onboarding, a team knowledge base, and a machine-readable repo contract (no-go zones, acceptance commands, guards) that people and AI agents both follow
 - **Requirements pipeline PoC** *(Sept 2026, paused)*: a multi-agent requirements-engineering pipeline. A hook writes every user input verbatim into a hash-chained evidence log, requirements live as typed records linked by ID, and six checker agents on different models audit each round, while a deterministic validator handles the mechanical checks. In an A/B with criteria fixed before the run, interview coverage tied with the existing setup (25.9% each); the existing setup's AI auditor spent 53% of its findings on mechanical checks that the validator catches in seconds at no token cost. 147 regression tests
 
 **Side Projects**
-- **[realping.tw](https://realping.tw)**: Taiwan property transactions cleaned into comparable prices per usable area (實坪), built and run solo. dbt-duckdb builds the dataset; one query core serves a REST API (FastAPI) and an MCP server (FastMCP, **listed in the official MCP Registry**), with API keys, usage quotas, self-serve signup and Cloudflare in front. A LightGBM valuation model (median error about 12%) is built and waiting for demand. Live at [api](https://api.realping.tw) / [mcp](https://mcp.realping.tw).realping.tw
+- **[realping.tw](https://realping.tw)**: Taiwan property transactions cleaned into comparable prices per usable area (實坪), built and run solo. dbt-duckdb builds the dataset; one query core serves a REST API (FastAPI) and an MCP server (FastMCP, **listed in the official MCP Registry**), with API keys, usage quotas, self-serve signup and Cloudflare in front. CI builds the images and smoke-tests a running container; deploys use keyless Workload Identity Federation, then confirm the live version; a daily production smoke test also flags a live service that has fallen behind `main` for too long. A LightGBM valuation model (median error about 12%) is built and waiting for demand. Live at [api](https://api.realping.tw) / [mcp](https://mcp.realping.tw).
 - **[bopomofokids.com](https://bopomofokids.com/en)**: a free Zhuyin (ㄅㄆㄇ) learning site for young kids that my wife started and I built out. A static React SPA with seven game modes, no backend or accounts, and Ministry of Education recordings for the readings. [Two rendering bugs, one Safari-only and one print-only →](https://myps6415.github.io/blog/bopomofokids-rendering-bugs)
 - **LINE family assistant** *(July 2026)*: a self-hosted LINE group bot (FastAPI behind a Cloudflare Tunnel) with 14 function-calling tools, including weather, quotes, reminders that @-mention people and price alerts gated by market hours, at zero marginal cost per message. Six watchdog jobs run outside Docker (liveness, daily health digest, delivery audit, verified backups, regression probes), because a webhook bot usually fails silently. [Series →](https://myps6415.github.io/blog/line-bot-family-assistant)
 

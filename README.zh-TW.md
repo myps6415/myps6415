@@ -2,7 +2,7 @@
 
 # 👋 嗨，我是 John Tung (@myps6415)
 
-### Data Lead · Principal Data Engineer · GCP 上的 Data／AI 平台 · 開源貢獻者
+### Data Lead · Principal Data Engineer · GCP 上的 Data／AI 與雲端平台 · 開源貢獻者
 
 ⭐ **[在 GitHub 追蹤我 →](https://github.com/myps6415)**
 
@@ -17,11 +17,12 @@
 ## 🚀 關於我
 - 🌏 住桃園，在媒體集團擔任 Data Lead／Principal Data Engineer，負責資料平台、平台上的 AI，以及團隊
 - 🛠️ 從零建立集團的 Data／AI 平台：跨平台資料擷取、dbt 建模、主管與編輯每天在用的三個上線產品，以及有品質門檻的生成式 AI
+- ☁️ 平台底下的基礎設施也自己建、自己維運：可重跑的 GCP 環境建置、依稽核 log 收窄的最小權限 IAM、免金鑰部署並在部署後驗證的 CI/CD，以及抓得到「job 成功卻沒寫資料」的監控
 - 🧰 在 **GCP、AWS、Azure** 都有正式環境經驗，用過 **Airflow** 和 **PySpark**。工具依需求選，目前以 GCP 為主
 - 👥 帶過 **4 人 Data Team 兩年半**（Scrum、培育、招募、廠商協作），帶團隊時也一直自己寫 code，現在也是
 - 🔬 出身中文文字探勘、NLP 與情感分析，跟現在做的 LLM 工作是同一條線
 - 🎯 偏好精簡、看得到狀態、成本低的架構（BigQuery、Cloud Run Jobs、dbt），不用重型編排工具；token 續期、job 冪等、帳單壓低這些瑣事花的時間不比建模少
-- 🏠 在一台 MacBook server 上跑 homelab：照片備份、監控、家庭 LINE 助手、自架 agent runtime 各是一組 Docker stack，各有自己的巡檢 job
+- 🏠 在一台 MacBook server 上跑 homelab：照片備份、Prometheus + Grafana 監控、家庭 LINE 助手、自架 agent runtime 各是一組 Docker stack，各有自己的巡檢 job
 - 📚 目前專注在讓 AI 可靠到能進編輯台：只依據數據生成、品質低於門檻就讓任務失敗的評測、在明確規則內工作的 agent，以及讓人和 AI agent 共用同一套 repo 規則
 
 ## 🛠️ 技術與工具
@@ -59,6 +60,8 @@
 ![Cloud Build](https://img.shields.io/badge/-Cloud%20Build-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/-GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
 ![Ansible](https://img.shields.io/badge/-Ansible-EE0000?style=flat-square&logo=ansible&logoColor=white)
+![Prometheus](https://img.shields.io/badge/-Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white)
+![Grafana](https://img.shields.io/badge/-Grafana-F46800?style=flat-square&logo=grafana&logoColor=white)
 ![Poetry](https://img.shields.io/badge/-Poetry-60A5FA?style=flat-square&logo=poetry&logoColor=white)
 ![pytest](https://img.shields.io/badge/-pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white)
 ![Ruff](https://img.shields.io/badge/-Ruff-D7FF64?style=flat-square&logo=ruff&logoColor=black)
@@ -74,12 +77,13 @@
 <details>
 <summary><b>常用模式與工具</b> — 我習慣選用的解法</summary>
 
-- **資料擷取**：Cloud Run Jobs + Cloud Scheduler（基於成本考量選用，而非 Airflow / Composer）、Cloud Build CI/CD
+- **資料擷取**：Cloud Run Jobs + Cloud Scheduler（基於成本考量選用，而非 Airflow / Composer）
+- **基礎設施與交付**：可重跑的 `gcloud` 環境建置、最小權限 IAM（依稽核 log、IAM condition、資源層級綁定）、Cloud Build push 即部署、GitHub Actions 搭配 Workload Identity Federation、容器冒煙測試與部署後驗版本
 - **建模**：dbt-bigquery — raw 層 append-only ingestion，再用 dbt 建 staging（view）/ marts（table），`QUALIFY ROW_NUMBER()` 去重
 - **API 串接**：Meta Graph API (Facebook / Instagram)、Threads API (OAuth 2.0)、YouTube Data API v3
 - **機敏資料與授權**：GCP Secret Manager、OAuth 2.0 長效 token 自動續期
-- **LLM 強化資料流**：Gemini（BigQuery `AI.GENERATE`）分類與只依數據的生成（已上線）、Vertex 嵌入 + KMEANS 分群 + 留言 RAG 檢索搭配 LLM-as-judge eval 守門（已上線）、編輯台 4 工具 agent：強制自檢、成本硬上限、每週回放評測（已上線）
-- **過去正式環境經驗**：高 QPS 的 GKE Fluentd 遙測、Apache Iceberg + Spark 資料湖、跨雲 (AWS ↔ GCP) ETL 搭配 Ansible 部署、傳統 ML (XGBoost / RandomForest / SVM) 用於使用者分群預測
+- **LLM 強化資料流**：Gemini（BigQuery `AI.GENERATE`）分類與只依數據的生成（已上線）、負評對象分類、Vertex 嵌入的留言 RAG 檢索搭配 LLM-as-judge eval 守門（已上線）、編輯台 4 工具 agent：強制自檢、成本硬上限、每週回放評測（已上線）
+- **過去正式環境經驗**：在 GKE 上從零建置的 Fluentd 收集服務 fluenthub（建叢集、6 副本滾動更新的 Deployment、Ingress + 靜態 IP、用 gcsfuse 掛載 schema；以 Spark 重放 40 萬筆真實文章壓測，峰值約 1,900 req/s、0 錯誤）、Apache Iceberg + Spark 資料湖、跨雲 (AWS ↔ GCP) ETL 搭配 Ansible 部署、傳統 ML (XGBoost / RandomForest / SVM) 用於使用者分群預測
 - **其他**：Poetry、pytest、ruff（CI lint + format）、GitHub Actions、SendGrid / SMTP 郵件報表框架
 
 </details>
@@ -87,19 +91,20 @@
 ## 💼 近期工作
 
 **工作上已上線**
+- **雲端基礎設施**：一支可重跑的腳本從零建出整套 GCP 環境（service account、IAM、Secret Manager、Artifact Registry、排程、告警）。Cloud Build push 即部署，耗時從 302 秒降到 85 秒，build 快取擋掉每月約 46GB 的映像堆積。共用 project 做資安審查時，我依稽核 log 把服務帳號的權限收窄到實際用到的範圍（IAM condition 加資源層級綁定，有 plan／apply／rollback），每個情境都先用臨時帳號實測過
 - **多平台資料擷取**：Facebook、Instagram、Threads、YouTube、GA4 經 34 個錯峰排程的 Cloud Run Jobs 寫入 BigQuery，append-only、讀取時去重。dbt source freshness、帳號級檢查與 Cloud Monitoring 會抓出「job 成功卻沒寫入資料」的情況。事後檢討：[缺值該存 NULL，不該存 0 →](https://myps6415.github.io/zh/blog/null-not-zero)
 - **給非工程師的三個上線產品**：給主管的集團營收儀表板、給行銷與編輯的社群成效儀表板，以及把月營收表排成報紙版面 PDF 的產製工具（Streamlit + ReportLab）。都跑在 Cloud Run，共用一套 Google 登入；主管可透過三層權限自行增刪成員，操作都留紀錄
 - **接手 pipeline 重寫**：把 Composer + Apps Script 的營收 pipeline 改成 BigQuery External Tables + Scheduled Queries，**月成本從約 USD 300 降到不到 USD 1**。以目前規模，Cloud Scheduler + Cloud Run Jobs 就能取代 managed orchestrator，規模變大時的遷移路徑已寫成文件
 - **Threads OAuth**：兩個帳號、八種權限，每週一支 Cloud Run Job 透過 Secret Manager 自動續期 60 天 token，不需要人工重新授權。編輯透過 Cloudflare Pages 上的靜態自助頁完成授權
-- **在資料倉儲裡跑 LLM 分類**：以 BigQuery `AI.GENERATE` 呼叫 Gemini 2.5 Flash，增量分類留言情緒與貼文主題，主題標籤對齊報社官網版面；共用快取讓按需推論的成本維持固定。[帳單怎麼沒跟著使用者變多 →](https://myps6415.github.io/zh/blog/llm-in-the-warehouse)
-- **留言分群與 RAG**：用 Vertex 嵌入與 KMEANS 把負評分群並命名主題。留言 RAG 每週跑 LLM-as-judge 評測，品質低於門檻就讓 job 失敗；目前第三次告警是真的問題（重複留言佔滿 top-k），修在檢索層，沒有調低門檻
+- **在資料倉儲裡跑 LLM 分類**：以 BigQuery `AI.GENERATE` 呼叫 Gemini，增量分類留言情緒與貼文主題，主題標籤對齊報社官網版面；共用快取讓按需推論的成本維持固定。[帳單怎麼沒跟著使用者變多 →](https://myps6415.github.io/zh/blog/llm-in-the-warehouse)
+- **留言分析與 RAG**：每則負評依「在不滿誰」分類（我們的報導、新聞事件本身或垃圾訊息），取代原本只能依話題分群的 KMEANS。留言 RAG（Vertex 嵌入） 每週跑 LLM-as-judge 評測，品質低於門檻就讓 job 失敗；目前第三次告警是真的問題（重複留言佔滿 top-k），修在檢索層，沒有調低門檻
 - **編輯台 agent**：四個工具（選題建議、爆款案例、競品雷達、依來源打草稿），不寫自由 SQL，每份草稿後跑忠實性檢查，每次與每人都有成本上限，每週回放評測工具選對率、忠實度與拒答
 - **競品與跨事業單位分析**：用官方 YouTube、Instagram API 抓競品資料做題材聲量比較，接上台股加權指數與景氣燈號，用 Mann-Kendall、Sen's slope、季節分解與 lead-lag 相關分辨大環境順風和真正的成長
 - **治理**：資料治理盤點（列出六項缺口與待決策）、所有 job 與 service 的成本 label、決策紀錄、新人 onboarding 階梯、團隊知識庫，以及人和 AI agent 都照著做的機器可讀 repo 契約（禁區、驗收指令、守門）
 - **需求管線 PoC** *（2026 年 9 月，暫停）*：多 agent 的需求工程管線。使用者每句輸入由 hook 逐字寫入有雜湊鏈的證據帳，需求存成以 ID 互聯的型別化記錄，每輪由六組不同模型的檢查員稽核，機械性檢查交給確定性的 validator。在跑之前就定好判準的 A/B 對照中，訪談覆蓋率與原做法打平（皆 25.9%）；原做法的 AI 稽核有 53% 的發現花在 validator 幾秒內、零 token 就能擋下的機械項。迴歸測試 147 項
 
 **個人專案**
-- **[realping.tw](https://realping.tw)**：我獨立開發、營運的台灣實坪房產交易資料。用 dbt-duckdb 清理政府開放資料，同一個查詢核心同時提供 REST API（FastAPI）與 MCP server（FastMCP，**已列於官方 MCP Registry**），有 API 金鑰、用量額度、自助申請，前面接 Cloudflare。另有一個 LightGBM 估價模型（誤差中位數約 12%），等需求出現再上線。網址 [api](https://api.realping.tw)／[mcp](https://mcp.realping.tw).realping.tw
+- **[realping.tw](https://realping.tw)**：我獨立開發、營運的台灣實坪房產交易資料。用 dbt-duckdb 清理政府開放資料，同一個查詢核心同時提供 REST API（FastAPI）與 MCP server（FastMCP，**已列於官方 MCP Registry**），有 API 金鑰、用量額度、自助申請，前面接 Cloudflare。CI 會 build image 並起容器做冒煙測試；部署走免金鑰的 Workload Identity Federation，部署後驗證線上版本；每天另有一支線上冒煙測試，線上版本落後 `main` 太久也會報。另有一個 LightGBM 估價模型（誤差中位數約 12%），等需求出現再上線。網址 [api](https://api.realping.tw)／[mcp](https://mcp.realping.tw)。
 - **[ㄅㄆㄇ 注音幼兒樂園（bopomofokids.com）](https://bopomofokids.com)**：我太太起頭、我接手做完的免費注音學習網站。純前端 React SPA，七種遊戲模式，沒有後端、沒有帳號，讀音用教育部真人錄音。[兩個渲染 bug，一個只在 Safari、一個只在列印時出現 →](https://myps6415.github.io/zh/blog/bopomofokids-rendering-bugs)
 - **LINE 家庭助手** *（2026 年 7 月）*：自架在家用 server 的 LINE 群組 bot（FastAPI，經 Cloudflare Tunnel 對外），有 14 個 function calling 工具，包括天氣、報價、會 @ 人的循環提醒、依盤中時段把關的到價警報，每則訊息的邊際成本是 0。另有六個跑在 Docker 外的巡檢 job（存活、每日健康摘要、提醒送達稽核、驗證過的備份、回歸探針），因為 webhook bot 出問題時通常不會有任何錯誤訊息。[系列文章 →](https://myps6415.github.io/zh/blog/line-bot-family-assistant)
 
