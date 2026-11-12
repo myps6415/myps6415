@@ -97,7 +97,7 @@
 - **接手 pipeline 重寫**：把 Composer + Apps Script 的營收 pipeline 改成 BigQuery External Tables + Scheduled Queries，**月成本從約 USD 300 降到不到 USD 1**。以目前規模，Cloud Scheduler + Cloud Run Jobs 就能取代 managed orchestrator，規模變大時的遷移路徑已寫成文件
 - **Threads OAuth**：兩個帳號、八種權限，每週一支 Cloud Run Job 透過 Secret Manager 自動續期 60 天 token，不需要人工重新授權。編輯透過 Cloudflare Pages 上的靜態自助頁完成授權
 - **在資料倉儲裡跑 LLM 分類**：以 BigQuery `AI.GENERATE` 呼叫 Gemini，增量分類留言情緒與貼文主題，主題標籤對齊報社官網版面；共用快取讓按需推論的成本維持固定。[帳單怎麼沒跟著使用者變多 →](https://myps6415.github.io/zh/blog/llm-in-the-warehouse)
-- **留言分析與 RAG**：每則負評依「在不滿誰」分類（我們的報導、新聞事件本身或垃圾訊息），取代原本只能依話題分群的 KMEANS。留言 RAG（Vertex 嵌入） 每週跑 LLM-as-judge 評測，品質低於門檻就讓 job 失敗；目前第三次告警是真的問題（重複留言佔滿 top-k），修在檢索層，沒有調低門檻
+- **留言分析與 RAG**：每則負評依「在不滿誰」分類（我們的報導、新聞事件本身或垃圾訊息），取代原本只能依話題分群的 KMEANS。留言 RAG（Vertex 嵌入）每週跑 LLM-as-judge 評測，品質低於門檻就讓 job 失敗；目前第三次告警是真的問題（重複留言佔滿 top-k），修在檢索層，沒有調低門檻
 - **編輯台 agent**：四個工具（選題建議、爆款案例、競品雷達、依來源打草稿），不寫自由 SQL，每份草稿後跑忠實性檢查，每次與每人都有成本上限，每週回放評測工具選對率、忠實度與拒答
 - **競品與跨事業單位分析**：用官方 YouTube、Instagram API 抓競品資料做題材聲量比較，接上台股加權指數與景氣燈號，用 Mann-Kendall、Sen's slope、季節分解與 lead-lag 相關分辨大環境順風和真正的成長
 - **治理**：資料治理盤點（列出六項缺口與待決策）、所有 job 與 service 的成本 label、決策紀錄、新人 onboarding 階梯、團隊知識庫，以及人和 AI agent 都照著做的機器可讀 repo 契約（禁區、驗收指令、守門）
